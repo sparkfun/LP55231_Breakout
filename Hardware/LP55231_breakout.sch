@@ -20557,7 +20557,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="LOGO3" library="SparkFun-Aesthetics" deviceset="OSHW-LOGO" device="S"/>
 <part name="LOGO2" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_NAME" device=".1_INCH"/>
-<part name="LED2" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
+<part name="LED3" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
 <part name="J2" library="SparkFun-Connectors" deviceset="M04" device="NO_SILK_ALL_ROUND" value="USER LED"/>
 <part name="J3" library="SparkFun-Connectors" deviceset="M04" device="NO_SILK_ALL_ROUND" value="USER LED"/>
 <part name="J4" library="SparkFun-Connectors" deviceset="M04" device="NO_SILK_ALL_ROUND" value="USER LED"/>
@@ -20583,7 +20583,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R1" library="SparkFun-Resistors" deviceset="150KOHM1/10W1%(0603)" device="" value="150K"/>
 <part name="GND2" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="LOGO1" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_FLAME" device=".1_INCH"/>
-<part name="LED3" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
+<part name="LED2" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
 </parts>
 <sheets>
 <sheet>
@@ -20635,7 +20635,7 @@ onboard I2C pullup resistors</text>
 <instance part="SUPPLY3" gate="G$1" x="68.58" y="104.14"/>
 <instance part="LOGO3" gate="G$1" x="233.68" y="45.72"/>
 <instance part="LOGO2" gate="G$1" x="88.9" y="2.54"/>
-<instance part="LED2" gate="D1" x="185.42" y="76.2" rot="R180"/>
+<instance part="LED3" gate="D1" x="185.42" y="76.2" rot="R180"/>
 <instance part="J2" gate="G$1" x="187.96" y="139.7" rot="MR0"/>
 <instance part="J3" gate="G$1" x="187.96" y="99.06" rot="MR0"/>
 <instance part="J4" gate="G$1" x="187.96" y="55.88" rot="MR0"/>
@@ -20661,7 +20661,7 @@ onboard I2C pullup resistors</text>
 <instance part="R1" gate="G$1" x="33.02" y="149.86" rot="R90"/>
 <instance part="GND2" gate="1" x="48.26" y="106.68"/>
 <instance part="LOGO1" gate="G$1" x="78.74" y="2.54"/>
-<instance part="LED3" gate="D1" x="190.5" y="119.38" rot="R180"/>
+<instance part="LED2" gate="D1" x="190.5" y="119.38" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -20670,7 +20670,7 @@ onboard I2C pullup resistors</text>
 <segment>
 <pinref part="U1" gate="G$1" pin="R3/D9"/>
 <wire x1="139.7" y1="93.98" x2="162.56" y2="93.98" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="D1" pin="RED-A"/>
+<pinref part="LED3" gate="D1" pin="RED-A"/>
 <wire x1="170.18" y1="78.74" x2="162.56" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="162.56" y1="78.74" x2="162.56" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="162.56" y1="78.74" x2="162.56" y2="53.34" width="0.1524" layer="91"/>
@@ -20684,7 +20684,7 @@ onboard I2C pullup resistors</text>
 <pinref part="U1" gate="G$1" pin="G3/D5"/>
 <wire x1="160.02" y1="91.44" x2="139.7" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="91.44" x2="160.02" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="D1" pin="GRN-A"/>
+<pinref part="LED3" gate="D1" pin="GRN-A"/>
 <wire x1="160.02" y1="76.2" x2="170.18" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="J4" gate="G$1" pin="3"/>
 <wire x1="182.88" y1="58.42" x2="160.02" y2="58.42" width="0.1524" layer="91"/>
@@ -20696,7 +20696,7 @@ onboard I2C pullup resistors</text>
 <segment>
 <pinref part="U1" gate="G$1" pin="B3/D6"/>
 <wire x1="139.7" y1="88.9" x2="157.48" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="D1" pin="BLU-A"/>
+<pinref part="LED3" gate="D1" pin="BLU-A"/>
 <wire x1="170.18" y1="73.66" x2="157.48" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="73.66" x2="157.48" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="73.66" x2="157.48" y2="60.96" width="0.1524" layer="91"/>
@@ -20713,7 +20713,7 @@ onboard I2C pullup resistors</text>
 <pinref part="J3" gate="G$1" pin="4"/>
 <wire x1="182.88" y1="104.14" x2="172.72" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="172.72" y1="104.14" x2="172.72" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="LED3" gate="D1" pin="BLU-A"/>
+<pinref part="LED2" gate="D1" pin="BLU-A"/>
 <wire x1="172.72" y1="116.84" x2="175.26" y2="116.84" width="0.1524" layer="91"/>
 <junction x="172.72" y="104.14"/>
 </segment>
@@ -20728,7 +20728,7 @@ onboard I2C pullup resistors</text>
 <wire x1="167.64" y1="96.52" x2="167.64" y2="104.14" width="0.1524" layer="91"/>
 <junction x="167.64" y="104.14"/>
 <wire x1="167.64" y1="119.38" x2="167.64" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="LED3" gate="D1" pin="RED-A"/>
+<pinref part="LED2" gate="D1" pin="RED-A"/>
 <wire x1="167.64" y1="121.92" x2="175.26" y2="121.92" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -20741,7 +20741,7 @@ onboard I2C pullup resistors</text>
 <wire x1="170.18" y1="101.6" x2="182.88" y2="101.6" width="0.1524" layer="91"/>
 <junction x="170.18" y="101.6"/>
 <wire x1="170.18" y1="116.84" x2="170.18" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="LED3" gate="D1" pin="GRN-A"/>
+<pinref part="LED2" gate="D1" pin="GRN-A"/>
 <wire x1="170.18" y1="119.38" x2="175.26" y2="119.38" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -21076,9 +21076,9 @@ onboard I2C pullup resistors</text>
 <wire x1="200.66" y1="76.2" x2="215.9" y2="76.2" width="0.1524" layer="91"/>
 <junction x="215.9" y="76.2"/>
 <wire x1="200.66" y1="73.66" x2="215.9" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="D1" pin="BLU-C"/>
-<pinref part="LED2" gate="D1" pin="GRN-C"/>
-<pinref part="LED2" gate="D1" pin="RED-C"/>
+<pinref part="LED3" gate="D1" pin="BLU-C"/>
+<pinref part="LED3" gate="D1" pin="GRN-C"/>
+<pinref part="LED3" gate="D1" pin="RED-C"/>
 <pinref part="JP6" gate="G$1" pin="2"/>
 <wire x1="215.9" y1="73.66" x2="215.9" y2="71.12" width="0.1524" layer="91"/>
 <junction x="215.9" y="73.66"/>
@@ -21095,9 +21095,9 @@ onboard I2C pullup resistors</text>
 <wire x1="205.74" y1="116.84" x2="215.9" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="116.84" x2="215.9" y2="109.22" width="0.1524" layer="91"/>
 <junction x="215.9" y="116.84"/>
-<pinref part="LED3" gate="D1" pin="BLU-C"/>
-<pinref part="LED3" gate="D1" pin="GRN-C"/>
-<pinref part="LED3" gate="D1" pin="RED-C"/>
+<pinref part="LED2" gate="D1" pin="BLU-C"/>
+<pinref part="LED2" gate="D1" pin="GRN-C"/>
+<pinref part="LED2" gate="D1" pin="RED-C"/>
 </segment>
 </net>
 <net name="N$3" class="0">

@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.01" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.001" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.005" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -58,7 +58,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="6" fill="1" visible="no" active="yes"/>
+<layer number="51" name="tDocu" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -1835,7 +1835,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="JP1" library="SparkFun-Passives" package="PAD-JUMPER-3-2OF3_NC_BY_TRACE_YES_SILK_FULL_BOX" value="A1" x="12.446" y="26.67" rot="MR270"/>
 <element name="LOGO3" library="SparkFun-Aesthetics" package="OSHW-LOGO-S" value="OSHW-LOGOS" x="12.7" y="24.892"/>
 <element name="LOGO2" library="SparkFun-Aesthetics" package="SFE_LOGO_NAME_.1" value="SFE_LOGO_NAME.1_INCH" x="0" y="0.254"/>
-<element name="LED2" library="SparkFun-LED" package="LED-TRICOLOR-5050" value="TRICOLOR-5050" x="17.78" y="5.08" rot="R270">
+<element name="LED3" library="SparkFun-LED" package="LED-TRICOLOR-5050" value="TRICOLOR-5050" x="17.78" y="5.08" rot="R270">
 <attribute name="PROD_ID" value="DIO-10298" x="17.78" y="5.08" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="J2" library="SparkFun-Connectors" package="1X04_NO_SILK_ALL_ROUND" value="USER LED" x="24.13" y="21.59" rot="R90">
@@ -1854,7 +1854,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="R5" library="SparkFun-Resistors" package="0603-RES" value="4.7K" x="10.16" y="6.858" rot="R270">
 <attribute name="PROD_ID" value="RES-07857" x="10.16" y="6.858" size="1.778" layer="27" font="vector" ratio="15" rot="R270" display="off"/>
 </element>
-<element name="FD2" library="SparkFun-Aesthetics" package="MICRO-FIDUCIAL" value="FIDUCIALUFIDUCIAL" x="1.905" y="1.905"/>
+<element name="FD2" library="SparkFun-Aesthetics" package="MICRO-FIDUCIAL" value="FIDUCIALUFIDUCIAL" x="1.905" y="3.81"/>
 <element name="FD1" library="SparkFun-Aesthetics" package="MICRO-FIDUCIAL" value="FIDUCIALUFIDUCIAL" x="21.59" y="27.94"/>
 <element name="JP4" library="SparkFun-Passives" package="PAD-JUMPER-2-NC_BY_TRACE_NO_SILK" value="Defeat LED1" x="19.05" y="24.384" rot="MR90"/>
 <element name="JP5" library="SparkFun-Passives" package="PAD-JUMPER-2-NC_BY_TRACE_NO_SILK" value="Defeat LED2" x="19.05" y="13.97" rot="MR90"/>
@@ -1872,14 +1872,14 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <attribute name="PROD_ID" value="RES-09117" x="7.62" y="6.858" size="1.778" layer="27" font="vector" ratio="15" rot="R270" display="off"/>
 </element>
 <element name="LOGO1" library="SparkFun-Aesthetics" package="SFE_LOGO_FLAME_.1" value="SFE_LOGO_FLAME.1_INCH" x="12.7" y="11.684" rot="MR0"/>
-<element name="LED3" library="SparkFun-LED" package="LED-TRICOLOR-5050" value="TRICOLOR-5050" x="17.78" y="15.24" rot="R90">
+<element name="LED2" library="SparkFun-LED" package="LED-TRICOLOR-5050" value="TRICOLOR-5050" x="17.78" y="15.24" rot="R90">
 <attribute name="PROD_ID" value="DIO-10298" x="17.78" y="15.24" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 </elements>
 <signals>
 <signal name="R3">
 <contactref element="U1" pad="11"/>
-<contactref element="LED2" pad="2"/>
+<contactref element="LED3" pad="2"/>
 <contactref element="J4" pad="1"/>
 <wire x1="12.18" y1="12.204" x2="14.224" y2="10.16" width="0.2032" layer="1"/>
 <wire x1="14.224" y1="10.16" x2="16.51" y2="10.16" width="0.2032" layer="1"/>
@@ -1892,7 +1892,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 </signal>
 <signal name="G3">
 <contactref element="U1" pad="15"/>
-<contactref element="LED2" pad="1"/>
+<contactref element="LED3" pad="1"/>
 <contactref element="J4" pad="3"/>
 <via x="18.542" y="9.652" extent="1-16" drill="0.381"/>
 <wire x1="15.748" y1="14.986" x2="16.006" y2="15.244" width="0.2032" layer="1"/>
@@ -1920,7 +1920,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 </signal>
 <signal name="B3">
 <contactref element="U1" pad="14"/>
-<contactref element="LED2" pad="3"/>
+<contactref element="LED3" pad="3"/>
 <contactref element="J4" pad="4"/>
 <via x="14.732" y="14.224" extent="1-16" drill="0.381"/>
 <wire x1="14.732" y1="14.224" x2="13.716" y2="13.208" width="0.2032" layer="16"/>
@@ -1944,7 +1944,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="17.018" y1="16.002" x2="18.034" y2="14.986" width="0.2032" layer="1"/>
 <wire x1="18.034" y1="14.986" x2="19.558" y2="14.986" width="0.2032" layer="1"/>
 <wire x1="13.43" y1="15.49" x2="13.966" y2="15.49" width="0.2032" layer="1"/>
-<contactref element="LED3" pad="3"/>
+<contactref element="LED2" pad="3"/>
 <wire x1="22.86" y1="19.05" x2="21.336" y2="17.526" width="0.2032" layer="1"/>
 <wire x1="21.336" y1="17.526" x2="21.336" y2="16.764" width="0.2032" layer="1"/>
 <wire x1="21.336" y1="16.764" x2="19.558" y2="14.986" width="0.2032" layer="1"/>
@@ -1961,7 +1961,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="12.7" y1="12.446" x2="13.716" y2="11.43" width="0.2032" layer="1"/>
 <wire x1="13.716" y1="11.43" x2="17.78" y2="11.43" width="0.2032" layer="1"/>
 <wire x1="24.13" y1="11.43" x2="17.78" y2="11.43" width="0.2032" layer="1"/>
-<contactref element="LED3" pad="2"/>
+<contactref element="LED2" pad="2"/>
 <wire x1="17.78" y1="12.84" x2="17.78" y2="11.43" width="0.2032" layer="1"/>
 </signal>
 <signal name="G2">
@@ -1975,7 +1975,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <via x="15.24" y="16.256" extent="1-16" drill="0.381"/>
 <wire x1="18.034" y1="20.066" x2="15.24" y2="17.272" width="0.2032" layer="16"/>
 <wire x1="15.24" y1="17.272" x2="15.24" y2="16.256" width="0.2032" layer="16"/>
-<contactref element="LED3" pad="1"/>
+<contactref element="LED2" pad="1"/>
 <wire x1="16.08" y1="12.84" x2="16.08" y2="14.302" width="0.2032" layer="1"/>
 <via x="16.256" y="14.478" extent="1-16" drill="0.381"/>
 <wire x1="16.256" y1="14.478" x2="16.256" y2="14.732" width="0.2032" layer="16"/>
@@ -2337,9 +2337,9 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="11.18" y1="20.228" x2="11.088" y2="20.32" width="0.2032" layer="1"/>
 </signal>
 <signal name="N$1">
-<contactref element="LED2" pad="4"/>
-<contactref element="LED2" pad="5"/>
-<contactref element="LED2" pad="6"/>
+<contactref element="LED3" pad="4"/>
+<contactref element="LED3" pad="5"/>
+<contactref element="LED3" pad="6"/>
 <contactref element="JP6" pad="2"/>
 <wire x1="19.48" y1="2.68" x2="19.48" y2="1.192" width="0.2032" layer="1"/>
 <wire x1="19.48" y1="1.192" x2="19.304" y2="1.016" width="0.2032" layer="1"/>
@@ -2358,9 +2358,9 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="19.05" y1="14.478" x2="19.05" y2="18.796" width="0.2032" layer="16"/>
 <wire x1="19.05" y1="18.796" x2="18.542" y2="19.304" width="0.2032" layer="16"/>
 <via x="18.542" y="19.304" extent="1-16" drill="0.381"/>
-<contactref element="LED3" pad="4"/>
-<contactref element="LED3" pad="6"/>
-<contactref element="LED3" pad="5"/>
+<contactref element="LED2" pad="4"/>
+<contactref element="LED2" pad="6"/>
+<contactref element="LED2" pad="5"/>
 <wire x1="19.48" y1="17.64" x2="19.48" y2="19.128" width="0.2032" layer="1"/>
 <wire x1="19.48" y1="19.128" x2="19.304" y2="19.304" width="0.2032" layer="1"/>
 <wire x1="19.304" y1="19.304" x2="18.542" y2="19.304" width="0.2032" layer="1"/>
