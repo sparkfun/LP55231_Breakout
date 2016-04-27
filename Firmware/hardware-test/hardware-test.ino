@@ -8,6 +8,9 @@ static uint32_t next;
 
 int8_t readReg(int8_t dev, int8_t reg)
 {
+  // Wire is awkward because it doesn't really have a register address concept.
+  // http://www.arduino.cc/en/Tutorial/SFRRangerReader for reference
+  
   Wire.beginTransmission(dev);
   Wire.write(reg);
   Wire.endTransmission();
