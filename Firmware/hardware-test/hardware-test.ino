@@ -45,9 +45,28 @@ static const uint8_t REG_D8_I_CTL  = 0x2d;
 static const uint8_t REG_D9_I_CTL  = 0x2e;
 
 static const uint8_t REG_MISC     = 0x36;
+static const uint8_t REG_PC1 = 0x37;
+static const uint8_t REG_PC2 = 0x38;
+static const uint8_t REG_PC3 = 0x39;
 static const uint8_t REG_STATUS_IRQ = 0x3A;
 static const uint8_t REG_RESET      = 0x3D;
 
+static const uint8_t REG_PROG1_START = 0x4C;
+static const uint8_t REG_PROG2_START = 0x4D;
+static const uint8_t REG_PROG3_START = 0x4E;
+static const uint8_t REG_PROG_PAGE_SEL = 0x4f;
+
+// Memory is more confusing - there are 4 pages, sel by addr 4f
+static const uint8_t REG_PROG_MEM_BASE = 0x50;
+//static const uint8_t REG_PROG_MEM_SIZE = 0x;//
+static const uint8_t REG_PROG_MEM_END  = 0x6f;
+
+static const uint8_t REG_ENG1_MAP_MSB = 0x70;
+static const uint8_t REG_ENG1_MAP_LSB = 0x71;
+static const uint8_t REG_ENG2_MAP_MSB = 0x72;
+static const uint8_t REG_ENG2_MAP_LSB = 0x73;
+static const uint8_t REG_ENG3_MAP_MSB = 0x74;
+static const uint8_t REG_ENG3_MAP_LSB = 0x75;
 
 static uint32_t next;
 //static bool     ledon;
@@ -101,7 +120,7 @@ void loop()
 {
   int32_t result;
   int8_t  val;
-  static uint8_t count = 0;
+  static uint32_t count = 0;
   
   if(millis() >= next)
   {
@@ -152,6 +171,51 @@ void loop()
       writeReg(0x32, REG_D7_CTRL, 20);
       writeReg(0x32, REG_D8_CTRL, 20);
       writeReg(0x32, REG_D9_CTRL, 20);
+
+
+
+      //Try poking in a program
+      //turn on ram access?
+      // CNTRL1 has 0's in engine control - IE: hold mode
+      writeReg(0x32, REG_CNTRL2, 0x10);
+
+      // the wait to change modes
+      do
+      {
+        val = readReg(0x32, REG_STATUS_IRQ) & 0x10; // engine busy bit
+        Serial.print(".");
+      }
+      while(val);
+
+      //try to write program from example
+      // datasheet says MSB of each instruction is in earlier address
+      // TBD: could optimize with a sequence of byte writes, using auto increment
+      writeReg(0x32, REG_PROG_MEM_BASE     , 0x9d);// output map - chan 7
+      writeReg(0x32, REG_PROG_MEM_BASE +  1, 0x07);
+      writeReg(0x32, REG_PROG_MEM_BASE +  2, 0x3e);// ramp up
+      writeReg(0x32, REG_PROG_MEM_BASE +  3, 0xff);
+      writeReg(0x32, REG_PROG_MEM_BASE +  4, 0x3f);// ramp dn
+      writeReg(0x32, REG_PROG_MEM_BASE +  5, 0xff);
+      writeReg(0x32, REG_PROG_MEM_BASE +  6, 0xa0);// loop
+      writeReg(0x32, REG_PROG_MEM_BASE +  7, 0x01);
+
+      // check too see if it's there?
+      Serial.print("prog peek ");
+      Serial.println((readReg(0x32, REG_PROG_MEM_BASE) & 0xff), HEX);
+      Serial.println((readReg(0x32, REG_PROG_MEM_BASE+1) & 0xff), HEX);
+      Serial.println((readReg(0x32, REG_PROG_MEM_BASE+2) & 0xff), HEX);
+      Serial.println((readReg(0x32, REG_PROG_MEM_BASE+3) & 0xff), HEX);
+
+
+      // set the PC1
+      writeReg(0x32, REG_PC1, 0);
+        
+      // tell engine how to execute the program...free/step, etc
+      writeReg(0x32, REG_CNTRL1, 0x40 | 0x20 );
+
+      // and start execution
+      writeReg(0x32, REG_CNTRL2, 0x20);
+      
     }
 
 #if 0
@@ -175,25 +239,27 @@ void loop()
       Serial.println((val&0x0ff), HEX);
     }
 #endif
-#if 1
-    writeReg(0x32, REG_D8_PWM, count );
-    writeReg(0x32, REG_D3_PWM, count );
-    writeReg(0x32, REG_D4_PWM, count );
+#if 0
+    val = count & 0xff;
+    writeReg(0x32, REG_D8_PWM, val );
+    writeReg(0x32, REG_D3_PWM, val );
+    writeReg(0x32, REG_D4_PWM, val );
 
-    writeReg(0x32, REG_D9_PWM, count );
-    writeReg(0x32, REG_D5_PWM, count );
-    writeReg(0x32, REG_D6_PWM, count );
+    writeReg(0x32, REG_D9_PWM, 0xff-val );
+    writeReg(0x32, REG_D5_PWM, 0xff-val );
+    writeReg(0x32, REG_D6_PWM, 0xff-val );
+//
+//    writeReg(0x32, REG_D7_PWM, (count>>1) );
+//    writeReg(0x32, REG_D1_PWM, count );
+//    writeReg(0x32, REG_D2_PWM, count );
 
-    writeReg(0x32, REG_D7_PWM, (count>>1) );
-    writeReg(0x32, REG_D1_PWM, count );
-    writeReg(0x32, REG_D2_PWM, count );
 
+//    val = readReg(0x32, REG_D8_PWM);
+//    Serial.print("PWM D8 val ");
+//    Serial.println(val);
 
-    val = readReg(0x32, REG_D8_PWM);
-    Serial.print("PWM D8 val ");
-    Serial.println(val);
 #endif
-    next += 50;
+    next += 1000;
     count++;
   }
 }
