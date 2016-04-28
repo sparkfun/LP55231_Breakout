@@ -160,7 +160,8 @@ void loop()
       // enable ratiometric color?
 //      writeReg(0x32, REG_RATIO_MSB, 0x01);
 //      writeReg(0x32, REG_RATIO_LSB, 0xff);
-  
+
+#if 1 
       // set all outputs to log
       writeReg(0x32, REG_D1_CTRL, 20);
       writeReg(0x32, REG_D2_CTRL, 20);
@@ -171,7 +172,7 @@ void loop()
       writeReg(0x32, REG_D7_CTRL, 20);
       writeReg(0x32, REG_D8_CTRL, 20);
       writeReg(0x32, REG_D9_CTRL, 20);
-
+#endif
 
 
       //Try poking in a program
@@ -190,22 +191,49 @@ void loop()
       //try to write program from example
       // datasheet says MSB of each instruction is in earlier address
       // TBD: could optimize with a sequence of byte writes, using auto increment
-      writeReg(0x32, REG_PROG_MEM_BASE     , 0x9d);// output map - chan 7
-      writeReg(0x32, REG_PROG_MEM_BASE +  1, 0x07);
-      writeReg(0x32, REG_PROG_MEM_BASE +  2, 0x3e);// ramp up
-      writeReg(0x32, REG_PROG_MEM_BASE +  3, 0xff);
-      writeReg(0x32, REG_PROG_MEM_BASE +  4, 0x3f);// ramp dn
+      writeReg(0x32, REG_PROG_MEM_BASE     , 0x9c);// 0 output map start at addr _
+      writeReg(0x32, REG_PROG_MEM_BASE +  1, 0x06);
+      writeReg(0x32, REG_PROG_MEM_BASE +  2, 0x9c );// 1 output map - sel at addr 4
+      writeReg(0x32, REG_PROG_MEM_BASE +  3, 0x8e);
+      
+      writeReg(0x32, REG_PROG_MEM_BASE +  4, 0x0e);// 2 ramp up
       writeReg(0x32, REG_PROG_MEM_BASE +  5, 0xff);
-      writeReg(0x32, REG_PROG_MEM_BASE +  6, 0xa0);// loop
-      writeReg(0x32, REG_PROG_MEM_BASE +  7, 0x01);
+      writeReg(0x32, REG_PROG_MEM_BASE +  6, 0x0f);// 3 ramp dn
+      writeReg(0x32, REG_PROG_MEM_BASE +  7, 0xff);
+      writeReg(0x32, REG_PROG_MEM_BASE +  8, 0x9d);// 4 next map entry
+      writeReg(0x32, REG_PROG_MEM_BASE +  9, 0x80);
+      writeReg(0x32, REG_PROG_MEM_BASE +  10, 0xa0);// 5 loop
+      writeReg(0x32, REG_PROG_MEM_BASE + 11, 0x02);
 
+      writeReg(0x32, REG_PROG_MEM_BASE + 12, 0x00);// 6 mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 13, 0x01);
+      writeReg(0x32, REG_PROG_MEM_BASE + 14, 0x00);// 7 mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 15, 0x02);
+      writeReg(0x32, REG_PROG_MEM_BASE + 16, 0x00);// 8 mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 17, 0x04);
+      writeReg(0x32, REG_PROG_MEM_BASE + 18, 0x00);// 9 mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 19, 0x08);
+      writeReg(0x32, REG_PROG_MEM_BASE + 20, 0x00);// 10mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 21, 0x10);
+      writeReg(0x32, REG_PROG_MEM_BASE + 22, 0x00);// 11mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 23, 0x20);
+      writeReg(0x32, REG_PROG_MEM_BASE + 24, 0x00);// 12mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 25, 0x40);
+      writeReg(0x32, REG_PROG_MEM_BASE + 26, 0x00);// 13mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 27, 0x80);
+      writeReg(0x32, REG_PROG_MEM_BASE + 28, 0x01);// 14mux data
+      writeReg(0x32, REG_PROG_MEM_BASE + 29, 0x00);
+
+      // and that's amlost a full page...can we put more data in next page??
+
+#if 0
       // check too see if it's there?
       Serial.print("prog peek ");
       Serial.println((readReg(0x32, REG_PROG_MEM_BASE) & 0xff), HEX);
       Serial.println((readReg(0x32, REG_PROG_MEM_BASE+1) & 0xff), HEX);
       Serial.println((readReg(0x32, REG_PROG_MEM_BASE+2) & 0xff), HEX);
       Serial.println((readReg(0x32, REG_PROG_MEM_BASE+3) & 0xff), HEX);
-
+#endif
 
       // set the PC1
       writeReg(0x32, REG_PC1, 0);
@@ -239,6 +267,15 @@ void loop()
       Serial.println((val&0x0ff), HEX);
     }
 #endif
+
+    val = readReg(0x32, REG_PC1);
+    Serial.print("PC1 val ");
+    Serial.println(val);
+    val = readReg(0x32, REG_ENG1_MAP_LSB);
+    Serial.print("map lsbs");
+    Serial.println(val);
+
+
 #if 0
     val = count & 0xff;
     writeReg(0x32, REG_D8_PWM, val );
