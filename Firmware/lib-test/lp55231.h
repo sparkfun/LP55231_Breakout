@@ -18,7 +18,20 @@ class lp55231
     void reset();
 
     bool setBrightness(uint8_t channel, uint8_t value);
-    void setLogBrightness(uint8_t channel);
+    bool setLogBrightness(uint8_t channel);
+    bool setDriveCurrent(uint8_t channel, uint8_t value);
+
+    void showStatuses();
+
+    bool loadProgram(const uint16_t* prog, uint8_t len);
+    bool setEnginePC(uint8_t engine, uint8_t addr);
+    uint8_t getEnginePC(uint8_t engine);
+    uint8_t getEngineMap(uint8_t engine);
+    uint8_t clearInterrupt();
+
+    bool setEngineRunning(uint8_t engine);
+    
+    
   
   private:
 

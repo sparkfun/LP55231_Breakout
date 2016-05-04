@@ -4,6 +4,7 @@
 
 static const int32_t enable_pin = 15; // Apparently active high?
 static const int32_t trigger_pin = 14; // low if unused
+static const int32_t interrupt_pin = 16;
 
 
 static uint32_t next;
@@ -11,26 +12,67 @@ static uint32_t next;
 
 static lp55231 ledChip(0x32);
 
+static const uint16_t program[] = 
+{
+  0x9c07, // 0 map start
+  0x9c8f, // 1 map end
+  0x0eff, // 2 ramp up over 255
+  0x0fff, // 3 ramp down over 255
+  0x9d80, // 4 mux map next
+  0xd000,  // 5 interrupt...resets PC..
+  0xa002, // 6 loop to 2
+  0x0001, // 7 channel map
+  0x0002, // 8
+  0x0004, // 9
+  0x0008, // a
+  0x0010, // b
+  0x0020, // c
+  0x0040, // d
+  0x0080, // e
+  0x0100, // f
+};
+
 void setup()
 {
+  Serial.begin(9600);
+  
+  delay(2000);
+  Serial.println("### Setup entry");
   
   pinMode(enable_pin, OUTPUT);
   digitalWrite(enable_pin, LOW);
   digitalWrite(enable_pin, HIGH);
 
   // Trigger is active hi, so unused means low
+  // but External trigger signal is active low
   pinMode(trigger_pin, OUTPUT);
-  digitalWrite(trigger_pin, LOW);
+  digitalWrite(trigger_pin, HIGH);
+
+  pinMode(interrupt_pin, INPUT);
 
   ledChip.init();
   ledChip.reset();
   ledChip.enable();
 
-  ledChip.setLogBrightness(6);
-  ledChip.setLogBrightness(7);
-  ledChip.setLogBrightness(8);
+  ledChip.setLogBrightness(0);
+
+  delay(1000);
+
+#if 1
+  if(ledChip.loadProgram(program, 16))
+  {
+    Serial.println("Program loaded?");
+  }
+  else
+  {
+    Serial.println("Program dodn't load?");
+  }
+#endif
 
   next = millis() + 3000;
+
+  Serial.println("### Setup complete");
+  
 }
 
 
@@ -40,19 +82,34 @@ void loop()
   int32_t result;
   int8_t  val;
   static uint32_t count = 0;
+
+  if( !digitalRead(interrupt_pin))
+  {
+    Serial.println("Interrupt asserted");
+    ledChip.clearInterrupt();
+    ledChip.setEnginePC(0, 0);
+    ledChip.setEngineRunning(0);
+  }
   
   if(millis() >= next)
   {
     Serial.print("#");
-    Serial.println(count);
+    Serial.print(count);
+    Serial.print(" ");
+    Serial.print(ledChip.getEnginePC(0));
+    Serial.print(" ");
+    Serial.println(ledChip.getEngineMap(0));
+    ledChip.showStatuses();
 
-    ledChip.setBrightness(6, 0xff);
-    ledChip.setBrightness(7, 0x7f);
-    ledChip.setBrightness(8, 0x3f);
+    if(count == 0)
+    {
+      //ledChip.fastProgram(program);
+      ledChip.setEnginePC(0, 0);
+      ledChip.setEngineRunning(0);
+    }    
 
     count++;
-    next += 25;
-    
+    next += 1000;
 
   }
 }
@@ -90,18 +147,6 @@ void loop()
 //      writeReg(0x32, REG_RATIO_MSB, 0x01);
 //      writeReg(0x32, REG_RATIO_LSB, 0xff);
 
-#if 1 
-      // set all outputs to log
-      writeReg(0x32, REG_D1_CTRL, 20);
-      writeReg(0x32, REG_D2_CTRL, 20);
-      writeReg(0x32, REG_D3_CTRL, 20);
-      writeReg(0x32, REG_D4_CTRL, 20);
-      writeReg(0x32, REG_D5_CTRL, 20);
-      writeReg(0x32, REG_D6_CTRL, 20);
-      writeReg(0x32, REG_D7_CTRL, 20);
-      writeReg(0x32, REG_D8_CTRL, 20);
-      writeReg(0x32, REG_D9_CTRL, 20);
-#endif
 
 
       //Try poking in a program
