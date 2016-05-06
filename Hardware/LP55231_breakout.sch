@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.3.0">
+<eagle version="7.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -18135,25 +18135,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;&lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="PLCC-6-LED">
-<wire x1="-1.6" y1="1.5" x2="1.6" y2="1.5" width="0.127" layer="51"/>
-<wire x1="1.6" y1="1.5" x2="1.6" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="1.6" y1="-1.5" x2="-1.6" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="-1.6" y1="-1.5" x2="-1.6" y2="1.5" width="0.127" layer="51"/>
-<circle x="-1.3" y="-1.3" radius="0.1" width="0.127" layer="51"/>
-<smd name="CB" x="-1.1" y="-1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<smd name="CR" x="0" y="-1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<smd name="CG" x="1.1" y="-1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<smd name="AG" x="1.1" y="1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<smd name="AR" x="0" y="1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<smd name="AB" x="-1.1" y="1.475" dx="1.3" dy="0.7" layer="1" rot="R90"/>
-<wire x1="-1.7" y1="-1.4" x2="-1.7" y2="1.4" width="0.2032" layer="21"/>
-<wire x1="1.7" y1="1.4" x2="1.7" y2="-1.4" width="0.2032" layer="21"/>
-<circle x="-1.1" y="-0.4" radius="0.1" width="0.2032" layer="21"/>
-<text x="-1.2" y="2.45" size="0.508" layer="25">&gt;Name</text>
-<text x="-1.3" y="-3.1" size="0.508" layer="27">&gt;Value</text>
-<circle x="-2.0398" y="-1.2636" radius="0.1" width="0.2032" layer="21"/>
-</package>
 <package name="LED-TRICOLOR-5050">
 <description>&lt;H3&gt;5050 SMD RGB LED&lt;/h3&gt;
 5.0mm x 5.0mm, 2.6mm thickness</description>
@@ -18192,42 +18173,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 <symbols>
-<symbol name="LED-TRICOLOR-SMD">
-<wire x1="7.62" y1="5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="5.08" x2="7.62" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="0" x2="-1.27" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-1.27" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="1.27" y2="0" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="0" x2="-2.54" y2="0" width="0.254" layer="94"/>
-<text x="-10.16" y="5.842" size="1.778" layer="95">&gt;NAME</text>
-<text x="-10.16" y="-7.62" size="1.778" layer="95">&gt;VALUE</text>
-<pin name="GRN" x="-12.7" y="-2.54" visible="pin" length="short"/>
-<pin name="BLU" x="-12.7" y="2.54" visible="pin" length="short"/>
-<pin name="BC" x="10.16" y="2.54" visible="pin" length="short" rot="R180"/>
-<pin name="RED" x="-12.7" y="0" visible="pin" length="short"/>
-<pin name="RC" x="10.16" y="0" visible="pin" length="short" rot="R180"/>
-<pin name="GC" x="10.16" y="-2.54" visible="pin" length="short" rot="R180"/>
-<wire x1="-1.27" y1="3.81" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="1.27" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="-1.27" y2="3.81" width="0.254" layer="94"/>
-<wire x1="0" y1="3.81" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-2.54" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-1.27" x2="-1.27" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-2.54" x2="-1.27" y2="-3.81" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-3.81" x2="0" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="-2.54" x2="-1.27" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="0" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="-2.54" x2="0" y2="-3.81" width="0.254" layer="94"/>
-<wire x1="0" y1="-2.54" x2="1.27" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-2.54" x2="-2.54" y2="-2.54" width="0.254" layer="94"/>
-</symbol>
 <symbol name="LED-TRICOLOR-INDV">
 <wire x1="12.7" y1="5.08" x2="12.7" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="12.7" y1="-5.08" x2="-12.7" y2="-5.08" width="0.254" layer="94"/>
@@ -18268,28 +18213,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="LED-TRICOLOR-NO-COM" prefix="LED">
-<gates>
-<gate name="G$1" symbol="LED-TRICOLOR-SMD" x="0" y="0"/>
-</gates>
-<devices>
-<device name="PLCC-6-SMD" package="PLCC-6-LED">
-<connects>
-<connect gate="G$1" pin="BC" pad="CB"/>
-<connect gate="G$1" pin="BLU" pad="AB"/>
-<connect gate="G$1" pin="GC" pad="CG"/>
-<connect gate="G$1" pin="GRN" pad="AG"/>
-<connect gate="G$1" pin="RC" pad="CR"/>
-<connect gate="G$1" pin="RED" pad="AR"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="DIO-12113" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="LED-TRICOLOR-5050" prefix="LED">
 <gates>
 <gate name="D1" symbol="LED-TRICOLOR-INDV" x="0" y="0"/>
@@ -20536,7 +20459,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND6" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND7" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="SUPPLY5" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
-<part name="LED1" library="SparkFun-LED" deviceset="LED-TRICOLOR-NO-COM" device="PLCC-6-SMD" value="TRICOLOR-PLCC-6"/>
 <part name="C4" library="SparkFun-Capacitors" deviceset="1.0UF-16V-10%(0603)" device="" value="1.0uF"/>
 <part name="C1" library="SparkFun-Capacitors" deviceset="1.0UF-16V-10%(0603)" device="" value="1.0uF"/>
 <part name="GND13" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
@@ -20584,6 +20506,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND2" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="LOGO1" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_FLAME" device=".1_INCH"/>
 <part name="LED2" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
+<part name="LED1" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC" value="TRICOLOR-5050"/>
 </parts>
 <sheets>
 <sheet>
@@ -20598,12 +20521,11 @@ A1, A0 = address (hex)
 0,1 - 0x33
 1,0 - 0x34
 1,1 - 0x35</text>
-<text x="190.5" y="167.64" size="1.778" layer="97" font="vector">J1, J2, J3 are header
-pads for PTH RGB LEDs, 
-such as COM-09264 or COM-00105.
-JP4, JP5, JP6 can be used to disable 
-onboard LEDs when external ones 
-are added</text>
+<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J1, J2, J3 are header pads for 
+PTH RGB LEDs, such as COM-09264 
+or COM-00105.  JP4, JP5, JP6 can 
+be used to disable onboard LEDs 
+when external ones are added</text>
 <text x="71.12" y="172.72" size="1.778" layer="97" font="vector">Disconnect JP3 to defeat
 onboard I2C pullup resistors</text>
 </plain>
@@ -20614,12 +20536,11 @@ onboard I2C pullup resistors</text>
 <instance part="GND6" gate="1" x="114.3" y="68.58"/>
 <instance part="GND7" gate="1" x="142.24" y="68.58"/>
 <instance part="SUPPLY5" gate="G$1" x="114.3" y="134.62"/>
-<instance part="LED1" gate="G$1" x="177.8" y="162.56"/>
 <instance part="C4" gate="G$1" x="142.24" y="76.2"/>
 <instance part="C1" gate="G$1" x="99.06" y="124.46"/>
 <instance part="GND13" gate="1" x="215.9" y="55.88"/>
 <instance part="GND12" gate="1" x="215.9" y="93.98"/>
-<instance part="GND11" gate="1" x="215.9" y="142.24"/>
+<instance part="GND11" gate="1" x="215.9" y="139.7"/>
 <instance part="GND4" gate="1" x="99.06" y="116.84"/>
 <instance part="C2" gate="G$1" x="127" y="139.7" rot="R90">
 <attribute name="PROD_ID" x="127" y="139.7" size="1.778" layer="96" font="vector" rot="R90" display="off"/>
@@ -20651,7 +20572,7 @@ onboard I2C pullup resistors</text>
 <instance part="FD2" gate="G$1" x="246.38" y="17.78"/>
 <instance part="FD1" gate="G$1" x="243.84" y="17.78"/>
 <instance part="GND5" gate="1" x="104.14" y="68.58"/>
-<instance part="JP4" gate="G$1" x="215.9" y="152.4" rot="R90"/>
+<instance part="JP4" gate="G$1" x="215.9" y="149.86" rot="R90"/>
 <instance part="JP5" gate="G$1" x="215.9" y="104.14" rot="R90"/>
 <instance part="JP6" gate="G$1" x="215.9" y="66.04" rot="R90"/>
 <instance part="J1" gate="G$1" x="15.24" y="129.54"/>
@@ -20662,6 +20583,7 @@ onboard I2C pullup resistors</text>
 <instance part="GND2" gate="1" x="48.26" y="106.68"/>
 <instance part="LOGO1" gate="G$1" x="78.74" y="2.54"/>
 <instance part="LED2" gate="D1" x="190.5" y="119.38" rot="R180"/>
+<instance part="LED1" gate="D1" x="190.5" y="160.02" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -20750,12 +20672,12 @@ onboard I2C pullup resistors</text>
 <pinref part="U1" gate="G$1" pin="R1/D7"/>
 <wire x1="139.7" y1="114.3" x2="160.02" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="114.3" x2="160.02" y2="137.16" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="RED"/>
-<wire x1="160.02" y1="137.16" x2="160.02" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="162.56" x2="165.1" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="137.16" x2="160.02" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="160.02" x2="175.26" y2="160.02" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="1"/>
 <wire x1="182.88" y1="137.16" x2="160.02" y2="137.16" width="0.1524" layer="91"/>
 <junction x="160.02" y="137.16"/>
+<pinref part="LED1" gate="D1" pin="GRN-A"/>
 </segment>
 </net>
 <net name="G1" class="0">
@@ -20763,12 +20685,12 @@ onboard I2C pullup resistors</text>
 <pinref part="U1" gate="G$1" pin="G1/D1"/>
 <wire x1="139.7" y1="111.76" x2="162.56" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="162.56" y1="111.76" x2="162.56" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="GRN"/>
-<wire x1="162.56" y1="142.24" x2="162.56" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="160.02" x2="165.1" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="162.56" y1="142.24" x2="162.56" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="162.56" y1="157.48" x2="175.26" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="3"/>
 <wire x1="182.88" y1="142.24" x2="162.56" y2="142.24" width="0.1524" layer="91"/>
 <junction x="162.56" y="142.24"/>
+<pinref part="LED1" gate="D1" pin="BLU-A"/>
 </segment>
 </net>
 <net name="B1" class="0">
@@ -20776,12 +20698,12 @@ onboard I2C pullup resistors</text>
 <pinref part="U1" gate="G$1" pin="B1/D2"/>
 <wire x1="139.7" y1="109.22" x2="157.48" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="109.22" x2="157.48" y2="144.78" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="BLU"/>
-<wire x1="157.48" y1="144.78" x2="157.48" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="165.1" x2="165.1" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="144.78" x2="157.48" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="162.56" x2="175.26" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="4"/>
 <wire x1="182.88" y1="144.78" x2="157.48" y2="144.78" width="0.1524" layer="91"/>
 <junction x="157.48" y="144.78"/>
+<pinref part="LED1" gate="D1" pin="RED-A"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -20844,7 +20766,7 @@ onboard I2C pullup resistors</text>
 <segment>
 <pinref part="GND11" gate="1" pin="GND"/>
 <pinref part="JP4" gate="G$1" pin="1"/>
-<wire x1="215.9" y1="144.78" x2="215.9" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="142.24" x2="215.9" y2="144.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP5" gate="G$1" pin="1"/>
@@ -21102,18 +21024,18 @@ onboard I2C pullup resistors</text>
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="LED1" gate="G$1" pin="BC"/>
+<wire x1="215.9" y1="157.48" x2="215.9" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="160.02" x2="215.9" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="162.56" x2="215.9" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="165.1" x2="187.96" y2="165.1" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="RC"/>
-<wire x1="187.96" y1="162.56" x2="215.9" y2="162.56" width="0.1524" layer="91"/>
-<junction x="215.9" y="162.56"/>
-<pinref part="LED1" gate="G$1" pin="GC"/>
-<wire x1="187.96" y1="160.02" x2="215.9" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="JP4" gate="G$1" pin="2"/>
-<wire x1="215.9" y1="160.02" x2="215.9" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="162.56" x2="205.74" y2="162.56" width="0.1524" layer="91"/>
 <junction x="215.9" y="160.02"/>
+<wire x1="205.74" y1="160.02" x2="215.9" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="JP4" gate="G$1" pin="2"/>
+<wire x1="205.74" y1="157.48" x2="215.9" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="157.48" x2="215.9" y2="154.94" width="0.1524" layer="91"/>
+<junction x="215.9" y="157.48"/>
+<pinref part="LED1" gate="D1" pin="BLU-C"/>
+<pinref part="LED1" gate="D1" pin="GRN-C"/>
+<pinref part="LED1" gate="D1" pin="RED-C"/>
 </segment>
 </net>
 </nets>
