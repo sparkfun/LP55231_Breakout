@@ -20512,7 +20512,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheet>
 <plain>
 <text x="170.18" y="10.16" size="2.54" layer="94" font="vector">Byron Jacquot</text>
-<text x="238.76" y="7.62" size="2.54" layer="94" font="vector">V01</text>
+<text x="238.76" y="7.62" size="2.54" layer="94" font="vector">V02</text>
 <text x="10.16" y="175.26" size="1.778" layer="97" font="vector">VCC Range from 2.7 to 5.5 VDC</text>
 <text x="33.02" y="53.34" size="1.778" layer="97" font="vector">JP1, JP2 configure
 I2C Addresses:
@@ -20826,7 +20826,6 @@ onboard I2C pullup resistors</text>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="33.02" y1="154.94" x2="33.02" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="160.02" x2="38.1" y2="160.02" width="0.1524" layer="91"/>
-<junction x="40.64" y="160.02"/>
 <wire x1="38.1" y1="160.02" x2="40.64" y2="160.02" width="0.1524" layer="91"/>
 </segment>
 </net>
