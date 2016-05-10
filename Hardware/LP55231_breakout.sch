@@ -18008,13 +18008,13 @@ for the logo on the board is tSilk.</description>
 <wire x1="-2" y1="2" x2="2" y2="2" width="0.127" layer="51"/>
 <wire x1="2" y1="2" x2="2" y2="-2" width="0.127" layer="51"/>
 <wire x1="2" y1="-2" x2="-2" y2="-2" width="0.127" layer="51"/>
-<wire x1="-2" y1="1.6" x2="-1.6" y2="2" width="0.127" layer="21"/>
-<wire x1="2" y1="2" x2="1.6" y2="2" width="0.127" layer="21"/>
-<wire x1="2" y1="2" x2="2" y2="1.6" width="0.127" layer="21"/>
-<wire x1="-2" y1="-2" x2="-1.6" y2="-2" width="0.127" layer="21"/>
-<wire x1="-2" y1="-2" x2="-2" y2="-1.6" width="0.127" layer="21"/>
-<wire x1="2" y1="-2" x2="2" y2="-1.6" width="0.127" layer="21"/>
-<wire x1="2" y1="-2" x2="1.6" y2="-2" width="0.127" layer="21"/>
+<wire x1="-2" y1="1.6" x2="-1.6" y2="2" width="0.2032" layer="21"/>
+<wire x1="2" y1="2" x2="1.6" y2="2" width="0.2032" layer="21"/>
+<wire x1="2" y1="2" x2="2" y2="1.6" width="0.2032" layer="21"/>
+<wire x1="-2" y1="-2" x2="-1.6" y2="-2" width="0.2032" layer="21"/>
+<wire x1="-2" y1="-2" x2="-2" y2="-1.6" width="0.2032" layer="21"/>
+<wire x1="2" y1="-2" x2="2" y2="-1.6" width="0.2032" layer="21"/>
+<wire x1="2" y1="-2" x2="1.6" y2="-2" width="0.2032" layer="21"/>
 <smd name="21" x="0.25" y="2" dx="0.25" dy="0.8" layer="1"/>
 <smd name="22" x="-0.25" y="2" dx="0.25" dy="0.8" layer="1"/>
 <smd name="23" x="-0.75" y="2" dx="0.25" dy="0.8" layer="1"/>
@@ -18057,8 +18057,8 @@ for the logo on the board is tSilk.</description>
 <pin name="SDA" x="-5.08" y="27.94" length="middle"/>
 <pin name="EN" x="-5.08" y="25.4" length="middle"/>
 <pin name="CLK" x="-5.08" y="22.86" length="middle"/>
-<pin name="INT" x="-5.08" y="17.78" length="middle"/>
-<pin name="TRIG" x="-5.08" y="15.24" length="middle"/>
+<pin name="!INT" x="-5.08" y="17.78" length="middle"/>
+<pin name="!TRIG" x="-5.08" y="15.24" length="middle"/>
 <pin name="ASEL0" x="-5.08" y="12.7" length="middle"/>
 <pin name="ASEL1" x="-5.08" y="10.16" length="middle"/>
 <pin name="B3/D6" x="27.94" y="7.62" length="middle" rot="R180"/>
@@ -18091,6 +18091,8 @@ for the logo on the board is tSilk.</description>
 <devices>
 <device name="WQFN" package="WQFN-24">
 <connects>
+<connect gate="G$1" pin="!INT" pad="7"/>
+<connect gate="G$1" pin="!TRIG" pad="10"/>
 <connect gate="G$1" pin="ASEL0" pad="20"/>
 <connect gate="G$1" pin="ASEL1" pad="21"/>
 <connect gate="G$1" pin="B1/D2" pad="18"/>
@@ -18106,13 +18108,11 @@ for the logo on the board is tSilk.</description>
 <connect gate="G$1" pin="G2/D3" pad="17"/>
 <connect gate="G$1" pin="G3/D5" pad="15"/>
 <connect gate="G$1" pin="GND" pad="4 EP"/>
-<connect gate="G$1" pin="INT" pad="7"/>
 <connect gate="G$1" pin="R1/D7" pad="13"/>
 <connect gate="G$1" pin="R2/D8" pad="12"/>
 <connect gate="G$1" pin="R3/D9" pad="11"/>
 <connect gate="G$1" pin="SCL" pad="9"/>
 <connect gate="G$1" pin="SDA" pad="8"/>
-<connect gate="G$1" pin="TRIG" pad="10"/>
 <connect gate="G$1" pin="VDD" pad="3"/>
 <connect gate="G$1" pin="VOUT" pad="22"/>
 </connects>
@@ -20521,13 +20521,17 @@ A1, A0 = address (hex)
 0,1 - 0x33
 1,0 - 0x34
 1,1 - 0x35</text>
-<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J1, J2, J3 are header pads for 
-PTH RGB LEDs, such as COM-09264 
-or COM-00105.  JP4, JP5, JP6 can 
-be used to disable onboard LEDs 
+<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J1, J2, J3 are header pads for PTH RGB LEDs,
+such as COM-09264 or COM-00105.  
+JP4, JP5, JP6 can be used to disable onboard LEDs 
 when external ones are added</text>
 <text x="71.12" y="172.72" size="1.778" layer="97" font="vector">Disconnect JP3 to defeat
 onboard I2C pullup resistors</text>
+<text x="91.44" y="43.18" size="1.778" layer="97" font="vector">Interrupt pin (pin 7) is active low.  
+Leave disconnected if unused.
+
+Trigger pin (pin 10) is active low, 
+connect to ground if unused</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -20927,7 +20931,7 @@ onboard I2C pullup resistors</text>
 </net>
 <net name="INT" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="INT"/>
+<pinref part="U1" gate="G$1" pin="!INT"/>
 <wire x1="106.68" y1="99.06" x2="99.06" y2="99.06" width="0.1524" layer="91"/>
 <label x="99.06" y="99.06" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
@@ -20943,7 +20947,7 @@ onboard I2C pullup resistors</text>
 </net>
 <net name="TRIG" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="TRIG"/>
+<pinref part="U1" gate="G$1" pin="!TRIG"/>
 <wire x1="106.68" y1="96.52" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
 <label x="99.06" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
