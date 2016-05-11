@@ -20473,7 +20473,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="PROD_ID" value="CAP-13216"/>
 <attribute name="SEE-ALSO" value="battery bayasitter"/>
 </part>
-<part name="JP3" library="SparkFun-Passives" deviceset="JUMPER-PAD-3-2OF3_NC_BY_TRACE" device="_SMALL" value="A0"/>
+<part name="JP2" library="SparkFun-Passives" deviceset="JUMPER-PAD-3-2OF3_NC_BY_TRACE" device="_SMALL" value="A0"/>
 <part name="JP1" library="SparkFun-Passives" deviceset="JUMPER-PAD-3-2OF3_NC_BY_TRACE" device="_SMALL" value="A1"/>
 <part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
@@ -20488,7 +20488,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND8" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND1" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="SUPPLY1" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
-<part name="JP2" library="SparkFun-Passives" deviceset="JUMPER-PAD-3-NC_BY_TRACE" device="" value="I2C-PULLUPS"/>
+<part name="JP3" library="SparkFun-Passives" deviceset="JUMPER-PAD-3-NC_BY_TRACE" device="" value="I2C-PULLUPS"/>
 <part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="R4" library="SparkFun-Resistors" deviceset="4.7KOHM-1/10W-1%(0603)" device="" value="4.7K"/>
 <part name="R5" library="SparkFun-Resistors" deviceset="4.7KOHM-1/10W-1%(0603)" device="" value="4.7K"/>
@@ -20521,7 +20521,7 @@ A1, A0 = address (hex)
 0,1 - 0x33
 1,0 - 0x34
 1,1 - 0x35</text>
-<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J1, J2, J3 are header pads for PTH RGB LEDs,
+<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J2, J3, J4 are header pads for PTH RGB LEDs,
 such as COM-09264 or COM-00105.  
 JP4, JP5, JP6 can be used to disable onboard LEDs 
 when external ones are added</text>
@@ -20554,7 +20554,7 @@ connect to ground if unused</text>
 <attribute name="PROD_ID" x="142.24" y="139.7" size="1.778" layer="96" font="vector" rot="R90" display="off"/>
 <attribute name="SEE-ALSO" x="142.24" y="139.7" size="1.778" layer="96" font="vector" rot="R90" display="off"/>
 </instance>
-<instance part="JP3" gate="G$1" x="73.66" y="93.98" rot="MR0"/>
+<instance part="JP2" gate="G$1" x="73.66" y="93.98" rot="MR0"/>
 <instance part="JP1" gate="G$1" x="63.5" y="83.82" rot="MR0"/>
 <instance part="GND3" gate="1" x="68.58" y="68.58"/>
 <instance part="SUPPLY3" gate="G$1" x="68.58" y="104.14"/>
@@ -20569,7 +20569,7 @@ connect to ground if unused</text>
 <instance part="GND8" gate="1" x="175.26" y="132.08"/>
 <instance part="GND1" gate="1" x="22.86" y="116.84"/>
 <instance part="SUPPLY1" gate="G$1" x="22.86" y="147.32"/>
-<instance part="JP2" gate="G$1" x="73.66" y="154.94" rot="R270"/>
+<instance part="JP3" gate="G$1" x="73.66" y="154.94" rot="R270"/>
 <instance part="SUPPLY4" gate="G$1" x="73.66" y="162.56"/>
 <instance part="R4" gate="G$1" x="66.04" y="139.7" rot="R90"/>
 <instance part="R5" gate="G$1" x="81.28" y="142.24" rot="R90"/>
@@ -20732,7 +20732,7 @@ connect to ground if unused</text>
 <wire x1="68.58" y1="76.2" x2="63.5" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="G$1" pin="3"/>
 <wire x1="63.5" y1="76.2" x2="63.5" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="G$1" pin="3"/>
+<pinref part="JP2" gate="G$1" pin="3"/>
 <wire x1="73.66" y1="88.9" x2="73.66" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="76.2" x2="68.58" y2="76.2" width="0.1524" layer="91"/>
 <junction x="68.58" y="76.2"/>
@@ -20800,7 +20800,7 @@ connect to ground if unused</text>
 <junction x="114.3" y="132.08"/>
 </segment>
 <segment>
-<pinref part="JP3" gate="G$1" pin="1"/>
+<pinref part="JP2" gate="G$1" pin="1"/>
 <wire x1="73.66" y1="99.06" x2="73.66" y2="101.6" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="SUPPLY3" gate="G$1" pin="VCC"/>
@@ -20818,7 +20818,7 @@ connect to ground if unused</text>
 </segment>
 <segment>
 <pinref part="SUPPLY4" gate="G$1" pin="VCC"/>
-<pinref part="JP2" gate="G$1" pin="2"/>
+<pinref part="JP3" gate="G$1" pin="2"/>
 <wire x1="73.66" y1="162.56" x2="73.66" y2="160.02" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -20883,7 +20883,7 @@ connect to ground if unused</text>
 <net name="ADDR0" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="ASEL0"/>
-<pinref part="JP3" gate="G$1" pin="2"/>
+<pinref part="JP2" gate="G$1" pin="2"/>
 <wire x1="106.68" y1="93.98" x2="78.74" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -20965,7 +20965,7 @@ connect to ground if unused</text>
 <segment>
 <pinref part="R5" gate="G$1" pin="2"/>
 <wire x1="81.28" y1="147.32" x2="81.28" y2="154.94" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="G$1" pin="1"/>
+<pinref part="JP3" gate="G$1" pin="1"/>
 <wire x1="81.28" y1="154.94" x2="78.74" y2="154.94" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -20973,7 +20973,7 @@ connect to ground if unused</text>
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="144.78" x2="66.04" y2="154.94" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="G$1" pin="3"/>
+<pinref part="JP3" gate="G$1" pin="3"/>
 <wire x1="66.04" y1="154.94" x2="68.58" y2="154.94" width="0.1524" layer="91"/>
 </segment>
 </net>
