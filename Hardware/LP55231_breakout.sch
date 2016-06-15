@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -20674,40 +20674,40 @@ connect to ground if unused</text>
 <net name="R1" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="R1/D7"/>
-<wire x1="139.7" y1="114.3" x2="160.02" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="114.3" x2="160.02" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="137.16" x2="160.02" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="160.02" x2="175.26" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="114.3" x2="154.94" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="114.3" x2="154.94" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="D1" pin="RED-A"/>
+<wire x1="154.94" y1="137.16" x2="154.94" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="162.56" x2="175.26" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="1"/>
-<wire x1="182.88" y1="137.16" x2="160.02" y2="137.16" width="0.1524" layer="91"/>
-<junction x="160.02" y="137.16"/>
-<pinref part="LED1" gate="D1" pin="GRN-A"/>
+<wire x1="182.88" y1="137.16" x2="154.94" y2="137.16" width="0.1524" layer="91"/>
+<junction x="154.94" y="137.16"/>
 </segment>
 </net>
 <net name="G1" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="G1/D1"/>
-<wire x1="139.7" y1="111.76" x2="162.56" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="111.76" x2="162.56" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="142.24" x2="162.56" y2="157.48" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="157.48" x2="175.26" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="111.76" x2="157.48" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="111.76" x2="157.48" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="D1" pin="GRN-A"/>
+<wire x1="157.48" y1="142.24" x2="157.48" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="160.02" x2="175.26" y2="160.02" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="3"/>
-<wire x1="182.88" y1="142.24" x2="162.56" y2="142.24" width="0.1524" layer="91"/>
-<junction x="162.56" y="142.24"/>
-<pinref part="LED1" gate="D1" pin="BLU-A"/>
+<wire x1="182.88" y1="142.24" x2="157.48" y2="142.24" width="0.1524" layer="91"/>
+<junction x="157.48" y="142.24"/>
 </segment>
 </net>
 <net name="B1" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="B1/D2"/>
-<wire x1="139.7" y1="109.22" x2="157.48" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="109.22" x2="157.48" y2="144.78" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="144.78" x2="157.48" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="162.56" x2="175.26" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="109.22" x2="160.02" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="109.22" x2="160.02" y2="144.78" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="D1" pin="BLU-A"/>
+<wire x1="160.02" y1="144.78" x2="160.02" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="157.48" x2="175.26" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="J2" gate="G$1" pin="4"/>
-<wire x1="182.88" y1="144.78" x2="157.48" y2="144.78" width="0.1524" layer="91"/>
-<junction x="157.48" y="144.78"/>
-<pinref part="LED1" gate="D1" pin="RED-A"/>
+<wire x1="182.88" y1="144.78" x2="160.02" y2="144.78" width="0.1524" layer="91"/>
+<junction x="160.02" y="144.78"/>
 </segment>
 </net>
 <net name="GND" class="0">
