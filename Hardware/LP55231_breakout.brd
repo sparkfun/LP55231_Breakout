@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.005" altunitdist="inch" altunit="inch"/>
+<grid distance="0.01" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.005" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -28,8 +28,8 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="16" fill="1" visible="no" active="yes"/>
-<layer number="22" name="bPlace" color="14" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="16" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="14" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
@@ -162,15 +162,15 @@
 <text x="0.635" y="26.543" size="1.016" layer="21" font="vector" ratio="15">LP55231 LED
 Driver Breakout</text>
 <text x="20.701" y="21.59" size="1.016" layer="21" font="vector" ratio="15" align="center-right">7</text>
-<text x="20.701" y="24.13" size="1.016" layer="21" font="vector" ratio="15" align="center-right">G</text>
+<text x="20.701" y="24.13" size="1.016" layer="21" font="vector" ratio="15" align="center-right">-</text>
 <text x="20.701" y="26.67" size="1.016" layer="21" font="vector" ratio="15" align="center-right">1</text>
 <text x="20.701" y="29.21" size="1.016" layer="21" font="vector" ratio="15" align="center-right">2</text>
 <text x="20.701" y="11.43" size="1.016" layer="21" font="vector" ratio="15" align="center-right">8</text>
-<text x="20.701" y="13.97" size="1.016" layer="21" font="vector" ratio="15" align="center-right">G</text>
+<text x="20.701" y="13.97" size="1.016" layer="21" font="vector" ratio="15" align="center-right">-</text>
 <text x="20.701" y="16.51" size="1.016" layer="21" font="vector" ratio="15" align="center-right">3</text>
 <text x="20.701" y="19.05" size="1.016" layer="21" font="vector" ratio="15" align="center-right">4</text>
 <text x="20.701" y="1.27" size="1.016" layer="21" font="vector" ratio="15" align="center-right">9</text>
-<text x="20.701" y="3.81" size="1.016" layer="21" font="vector" ratio="15" align="center-right">G</text>
+<text x="20.701" y="3.81" size="1.016" layer="21" font="vector" ratio="15" align="center-right">-</text>
 <text x="20.701" y="6.35" size="1.016" layer="21" font="vector" ratio="15" align="center-right">5</text>
 <text x="20.701" y="8.89" size="1.016" layer="21" font="vector" ratio="15" align="center-right">6</text>
 <wire x1="22.86" y1="10.16" x2="17.78" y2="10.16" width="0.254" layer="21"/>
@@ -2006,11 +2006,12 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="14.81" y1="23" x2="14.81" y2="22.274" width="0.2032" layer="1"/>
 <wire x1="14.81" y1="22.274" x2="15.24" y2="21.844" width="0.2032" layer="1"/>
 <wire x1="15.24" y1="21.844" x2="15.24" y2="21.082" width="0.2032" layer="1"/>
-<wire x1="14.986" y1="24.638" x2="16.764" y2="24.638" width="0.2032" layer="1"/>
+<wire x1="16.256" y1="24.638" x2="16.764" y2="24.638" width="0.2032" layer="1"/>
 <wire x1="16.764" y1="24.638" x2="18.796" y2="26.67" width="0.2032" layer="1"/>
-<wire x1="14.732" y1="23.114" x2="14.732" y2="24.384" width="0.2032" layer="1"/>
-<wire x1="14.732" y1="23.114" x2="14.81" y2="23" width="0.2032" layer="1"/>
-<wire x1="14.732" y1="24.384" x2="14.986" y2="24.638" width="0.2032" layer="1"/>
+<wire x1="16.256" y1="24.638" x2="14.986" y2="24.638" width="0.2032" layer="1"/>
+<wire x1="14.986" y1="24.638" x2="14.732" y2="24.384" width="0.2032" layer="1"/>
+<wire x1="14.732" y1="24.384" x2="14.732" y2="23.078" width="0.2032" layer="1"/>
+<wire x1="14.732" y1="23.078" x2="14.81" y2="23" width="0.2032" layer="1"/>
 </signal>
 <signal name="B1">
 <contactref element="U1" pad="18"/>
@@ -2459,10 +2460,10 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <approved hash="19,16,a13f4d034d97a1ab"/>
 <approved hash="19,16,6b577d4ac4b0f950"/>
 <approved hash="19,16,1b552d3d07c48c51"/>
-<approved hash="19,16,c61224f29e30d432"/>
-<approved hash="19,16,6640bbbca842dd5c"/>
 <approved hash="19,16,9907cea95e97a1db"/>
+<approved hash="19,16,6640bbbca842dd5c"/>
 <approved hash="19,16,c613aaad90a354ff"/>
+<approved hash="19,16,c61224f29e30d432"/>
 <approved hash="19,16,575c2591559231a5"/>
 <approved hash="19,16,eb4f8ff9c61c604a"/>
 <approved hash="19,16,e63c032ed474ea9c"/>
