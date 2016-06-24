@@ -20521,7 +20521,7 @@ A1, A0 = address (hex)
 0,1 - 0x33
 1,0 - 0x34
 1,1 - 0x35</text>
-<text x="157.48" y="170.18" size="1.778" layer="97" font="vector">J2, J3, J4 are header pads for PTH RGB LEDs,
+<text x="144.78" y="172.72" size="1.778" layer="97" font="vector">J2, J3, J4 are header pads for common cathode PTH RGB LEDs,
 such as COM-09264 or COM-00105.  
 JP4, JP5, JP6 can be used to disable onboard LEDs 
 when external ones are added</text>
