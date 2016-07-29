@@ -135,7 +135,12 @@ void lp55231::reset()
 
 bool lp55231::setBrightness(uint8_t channel, uint8_t value)
 {
-  if(channel > 9)
+  Serial.print("setBrt: chan: ");
+  Serial.print(channel);
+  Serial.print(" val: ");
+  Serial.println(value);
+  
+  if(channel >= 9)
   {
     Serial.println("setBrightness: invalid channel");
     return false;
@@ -147,7 +152,7 @@ bool lp55231::setBrightness(uint8_t channel, uint8_t value)
 
 bool lp55231::setLogBrightness(uint8_t channel)
 {
-  if(channel > 9)
+  if(channel >= 9)
   {
     Serial.println("setLogBrightness: invalid channel");
     return false;
@@ -170,13 +175,13 @@ bool lp55231::setDriveCurrent(uint8_t channel, uint8_t value)
   return true;
 }
 
-void lp55231::showStatuses()
-{
-  Serial.print("Statuses: ");
-  Serial.print(readReg(REG_CNTRL1) & 0xff, HEX);
-  Serial.print(" ");
-  Serial.println(readReg(REG_CNTRL2) & 0xff, HEX);
-}
+//void lp55231::showStatuses()
+//{
+//  Serial.print("Statuses: ");
+//  Serial.print(readReg(REG_CNTRL1) & 0xff, HEX);
+//  Serial.print(" ");
+//  Serial.println(readReg(REG_CNTRL2) & 0xff, HEX);
+//}
 
 bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
 {
