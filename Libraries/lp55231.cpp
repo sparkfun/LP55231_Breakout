@@ -198,8 +198,9 @@ void lp55231::showControls()
 bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
 {
   uint8_t val;
+  uint8_t page;
 
-  if(len > 16)
+  if(len > 96)
   {
     // TBD - support multiple pages
 
@@ -210,26 +211,43 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
   // temp - try to tell it what to reset to?
   //writeReg(REG_PROG1_START, 0x08);
 
-
   // set up program write
   // start in execution disabled mode (0b00)
   // required to get into load mode.
   // "Load program mode can be entered from the disabled mode only.  be
   // entered from the disabled mode only."
   writeReg(REG_CNTRL2, 0x00);
-  // put engine into load mode
   writeReg(REG_CNTRL2, 0x10);
-//  writeReg(REG_CNTRL2, 0x04);
 
   waitForBusy();
 
-  //try to write program from example
+  // try to write program from example
   // datasheet says MSB of each instruction is in earlier address
   // TBD: could optimize with a sequence of byte writes, using auto increment
 
   // use auto-increment of chip - enabled in MISC.
   // If it gets turned off, this breaks.  TBD: set it explicitly?
-  for(uint8_t i = 0; i < len; i++)
+
+  // Write complete pages, setting page reg for each.
+  for(page = 0; page < (len/16); page++)
+  {
+    writeReg(REG_PROG_PAGE_SEL, page);
+
+    for(uint8_t i = 0; i < 16; i++)
+    {
+      Wire.beginTransmission(_address);
+      Wire.write((REG_PROG_MEM_BASE + (i*2)));
+      // MSB then LSB
+      Wire.write((prog[i]>> 8) & 0xff);
+      Wire.write(prog[i] & 0xff);
+      Wire.endTransmission();
+    }
+  }
+
+  // plus any incomplete pages
+  page = len/16;
+  writeReg(REG_PROG_PAGE_SEL, page);
+  for(uint8_t i = 0; i < (len%16); i++)
   {
     Wire.beginTransmission(_address);
     Wire.write((REG_PROG_MEM_BASE + (i*2)));
@@ -239,19 +257,14 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
     Wire.endTransmission();
   }
 
-  // Temp - try writing program counter right after we've loaded it's prog?
-  //writeReg(REG_PC1, 0x04);
-
-  //
-
   return true;
 }
 
 bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
 {
-  uint8_t val;
+  uint8_t val, page;
 
-  if(len > 16)
+  if(len > 96)
   {
     // TBD - support multiple pages
 
@@ -259,30 +272,47 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
     return false;
   }
 
-  // set up program write
-  // start in execution disabled mode (0b00)
-  // required to get into load mode.
-  // "Load program mode can be entered from the disabled mode only.  be
-  // entered from the disabled mode only."
-//  writeReg(REG_CNTRL2, 0x00);
-  // put engine into load mode
-//  writeReg(REG_CNTRL2, 0x10);
-//  writeReg(REG_CNTRL2, 0x15);
-
-  //writeReg(REG_CNTRL1, 0x40); // set engines to hold mode.
-
-  waitForBusy();
-
   writeReg(REG_CNTRL2, 0x00);// engines into disable mode - required for entry to program mode.
   writeReg(REG_CNTRL2, 0x10);// engines into program mode?
-  writeReg(REG_PROG_PAGE_SEL, 0x00);
-  //try to read  program from chip,
+  /try to read  program from chip,
   // datasheet says MSB of each instruction is in earlier address
   // TBD: could optimize with a sequence of byte writes, using auto increment
 
-  // TBD: use auto-increment of chip - enabled in MISC.
-  // If it gets turned off, this breaks.  TBD: set it explicitly?
-  for(uint8_t i = 0; i < len; i++)
+  // Auto-increment may not work for sequential reads...
+  for(page = 0; page < (len/16); page++)
+  {
+    writeReg(REG_PROG_PAGE_SEL, page);
+
+    for(uint8_t i = 0; i < 16; i++)
+    {
+      uint16_t msb, lsb;
+      uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
+      Serial.print("Verifying: ");
+      Serial.println(addr, HEX);
+
+      msb = readReg(addr);
+      lsb = readReg(addr + 1);
+
+      lsb |= (msb << 8);
+
+      if(lsb != prog[i])
+      {
+        Serial.print("program mismatch.  Idx:");
+        Serial.print(i);
+        Serial.print(" local:");
+        Serial.print(prog[i], HEX);
+        Serial.print(" remote:");
+        Serial.println(lsb, HEX);
+
+        return false;
+      }
+    }
+  }
+
+  // plus any incomplete pages
+  page = len/16;
+  writeReg(REG_PROG_PAGE_SEL, page);
+  for(uint8_t i = 0; i < (len%16); i++)
   {
     uint16_t msb, lsb;
     uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
@@ -303,17 +333,11 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
       Serial.print(" remote:");
       Serial.println(lsb, HEX);
 
-      //return false;
+      return false;
     }
   }
 
-  // Temp - try writing program counter right after we've loaded it's prog?
-  //writeReg(REG_CNTRL2, 0x3f);
-
-  //
-
   return true;
-
 }
 
 bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
@@ -494,7 +518,7 @@ uint8_t lp55231::readReg(uint8_t reg)
 
   delayMicroseconds(10);
 
-  uint8_t status = Wire.requestFrom(_address, 1);
+  uint8_t status = Wire.requestFrom(_address, (uint8_t)1);
   if(status)
   {
     return(Wire.read());
