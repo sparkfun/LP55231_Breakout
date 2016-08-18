@@ -82,7 +82,7 @@ static const uint8_t REG_PROG2_START = 0x4D;
 static const uint8_t REG_PROG3_START = 0x4E;
 static const uint8_t REG_PROG_PAGE_SEL = 0x4f;
 
-// Memory is more confusing - there are 4 pages, sel by addr 4f
+// Memory is more confusing - there are 6 pages, sel by addr 4f
 static const uint8_t REG_PROG_MEM_BASE = 0x50;
 //static const uint8_t REG_PROG_MEM_SIZE = 0x;//
 static const uint8_t REG_PROG_MEM_END  = 0x6f;
@@ -187,13 +187,13 @@ bool lp55231::setMasterFader(uint8_t engine, uint8_t value)
   return true;
 }
 
-//void lp55231::showStatuses()
-//{
-//  Serial.print("Statuses: ");
-//  Serial.print(readReg(REG_CNTRL1) & 0xff, HEX);
-//  Serial.print(" ");
-//  Serial.println(readReg(REG_CNTRL2) & 0xff, HEX);
-//}
+void lp55231::showControls()
+{
+ Serial.print("Control regs: ");
+ Serial.print(readReg(REG_CNTRL1) & 0xff, HEX);
+ Serial.print(" ");
+ Serial.println(readReg(REG_CNTRL2) & 0xff, HEX);
+}
 
 bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
 {
@@ -318,7 +318,7 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
 
 bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
 {
-  uint8_t control_val, temp;;
+  uint8_t control_val, control2_val, temp;;
 
   if(engine > 2)
   {
@@ -326,8 +326,8 @@ bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
     return false;
   }
 
-  // There are 4 pages of 16 instructions each
-  if(addr > 63)
+  // There are 6 pages of 16 instructions each (0..95)
+  if(addr >= 96)
   {
     Serial.println("Invalid addr in set PC");
     return false;
@@ -338,6 +338,8 @@ bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
   //(PC) can be read or written only in this mode.
 
   control_val = readReg(REG_CNTRL1);
+  control2_val = readReg(REG_CNTRL2);
+
   temp = (control_val & ~(0x30 >> (engine * 2)));
 
   Serial.print("set PC: ");
@@ -349,15 +351,19 @@ bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
   Serial.print(" ");
   Serial.println(addr);
 
-  writeReg(REG_CNTRL1, temp);
-  writeReg(REG_CNTRL2, 0x10);// engine 1 load mode
+  writeReg(REG_CNTRL2, 0x3ff); // halt engines immediately.
+  writeReg(REG_CNTRL1, temp);// put engine in load mode
+  //writeReg(REG_CNTRL2, 0x10);// engine 1 load mode
 
-  delay(50); // allow it to finish current instruction
+//  delay(50); // allow it to finish current instruction
 
   writeReg(REG_PC1 + engine, addr);
 
+//  delay(50); // allow it to finish current instruction
+
   // restore prev mode?
   writeReg(REG_CNTRL1, control_val);
+  writeReg(REG_CNTRL2, control2_val);
 
   return true;
 }
@@ -372,18 +378,20 @@ uint8_t lp55231::getEnginePC(uint8_t engine)
     Serial.println("Invalid engine num in set PC");
     return -1;
   }
-  control_val = readReg(REG_CNTRL1);
-  //control_val &= ~0x30;
-  // TBd - engine specific!!
-  // TBD - wait for BSY
-  writeReg(REG_CNTRL1, (control_val & ~0x30));
-
-  waitForBusy();
+  //
+  // control_val = readReg(REG_CNTRL1);
+  // //control_val &= ~0x30;
+  // // TBd - engine specific!!
+  // // TBD - wait for BSY
+  // writeReg(REG_CNTRL1, (control_val & ~0x30));
+  //
+  // //waitForBusy();
+  // delay(10);
 
   pc_val =  readReg(REG_PC1 + engine);
 
-  // restore old control val;
-  writeReg(REG_CNTRL1, control_val);
+  // // restore old control val;
+  // writeReg(REG_CNTRL1, control_val);
 
   return(pc_val);
 }
@@ -482,16 +490,21 @@ uint8_t lp55231::readReg(uint8_t reg)
 
   Wire.beginTransmission(_address);
   Wire.write(reg);
-  Wire.endTransmission();
+  Wire.endTransmission(false);// false keeps connection active so we can read.
 
-  if(Wire.requestFrom(_address, 1))
+  delayMicroseconds(10);
+
+  uint8_t status = Wire.requestFrom(_address, 1);
+  if(status)
   {
     return(Wire.read());
   }
   else
   {
-    Serial.println("readReg failed?");
+    Serial.print("readReg failed? status:");
+    Serial.println(status, HEX);
   }
+  return 0xff;
 }
 
 void lp55231::writeReg(uint8_t reg, uint8_t val)

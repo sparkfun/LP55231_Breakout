@@ -1,6 +1,6 @@
 #include <Wire.h>
 
-#include "lp55231.h"
+#include <lp55231.h>
 
 static const int32_t enable_pin = 15; // Apparently active high?
 static const int32_t trigger_pin = 14; // low if unused
@@ -15,19 +15,19 @@ static lp55231 ledChip(0x32);
 static const uint16_t program[] = 
 {
   0x9D02, // 0 map direct 
-  0x08ff, // 1 ramp up
-  0x09ff, // 2 ramp dn
+  0x18ff, // 1 ramp up
+  0x19ff, // 2 ramp dn
   //0xa000, // 3 loop to 0
   0x1d00,
   0x9D03, // 4 map direct 
-  0x08ff, // 5 ramp up
-  0x09ff, // 6 ramp dn
+  0x18ff, // 5 ramp up
+  0x19ff, // 6 ramp dn
   //0xa000, // 7 loop to 4
   0x1d00, // 7 wait...
   0x9D06, // 8 map direct 
-  0x08ff, // 9 ramp up
-  0x09ff, // a ramp dn
-  0xa000  // b loop to 4
+  0x18ff, // 9 ramp up
+  0x19ff, // a ramp dn
+  0xa008  // b loop to 4
   
 };
 
@@ -62,6 +62,18 @@ void setup()
     ledChip.setDriveCurrent(i, 111);
   }
 
+  ledChip.showControls();
+
+  ledChip.clearInterrupt();
+  ledChip.setEnginePC(0, 4);
+
+  ledChip.showControls();
+
+  Serial.println(ledChip.getEnginePC(0));
+  Serial.println(ledChip.getEnginePC(1));
+  Serial.println(ledChip.getEnginePC(2));
+
+
 #if 1
   Serial.println(sizeof(program)/2);
   if(ledChip.loadProgram(program, (sizeof(program)/2)))
@@ -83,9 +95,13 @@ void setup()
   next = millis() + 3000;
 
   ledChip.clearInterrupt();
-  //ledChip.setEnginePC(0, 4);
+  ledChip.setEnginePC(0, 4);
+
+  ledChip.showControls();
 
   Serial.println(ledChip.getEnginePC(0));
+  Serial.println(ledChip.getEnginePC(1));
+  Serial.println(ledChip.getEnginePC(2));
   
   //ledChip.setEnginePC(1, 4);
   ledChip.setEngineRunning(0);
@@ -105,17 +121,17 @@ void loop()
 
   if(millis() >= next)
   {
-    next += 1000;
+    next += 10000;
     count++;
     
     Serial.print("# ");
     Serial.println(count);
 
-//  Serial.println(ledChip.getEnginePC(0));
+  Serial.println(ledChip.getEnginePC(0));
 //    Serial.print(" ");
 //    Serial.println(ledChip.getEnginePC(1));
-
-    //ledChip.setEnginePC(0, 0);
+//    if(count % 20 == 0)
+//      ledChip.setEnginePC(0, 0);
     
   }
 }

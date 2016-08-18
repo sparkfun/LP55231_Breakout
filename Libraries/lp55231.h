@@ -23,7 +23,7 @@ class lp55231
 
     bool setMasterFader(uint8_t engine, uint8_t value);
 
-//    void showStatuses();
+    void showControls();
 
     bool loadProgram(const uint16_t* prog, uint8_t len);
     bool verifyProgram(const uint16_t* prog, uint8_t len);
