@@ -3,7 +3,7 @@
 <eagle version="7.5.0">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -20512,7 +20512,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheet>
 <plain>
 <text x="170.18" y="10.16" size="2.54" layer="94" font="vector">Byron Jacquot</text>
-<text x="238.76" y="7.62" size="2.54" layer="94" font="vector">V03</text>
+<text x="238.76" y="7.62" size="2.54" layer="94" font="vector">V10</text>
 <text x="10.16" y="175.26" size="1.778" layer="97" font="vector">VCC Range from 2.7 to 5.5 VDC</text>
 <text x="33.02" y="53.34" size="1.778" layer="97" font="vector">JP1, JP2 configure
 I2C Addresses:
@@ -20564,7 +20564,7 @@ connect to ground if unused</text>
 <instance part="J2" gate="G$1" x="187.96" y="139.7" rot="MR0"/>
 <instance part="J3" gate="G$1" x="187.96" y="99.06" rot="MR0"/>
 <instance part="J4" gate="G$1" x="187.96" y="55.88" rot="MR0"/>
-<instance part="GND10" gate="1" x="180.34" y="45.72"/>
+<instance part="GND10" gate="1" x="177.8" y="45.72"/>
 <instance part="GND9" gate="1" x="177.8" y="91.44"/>
 <instance part="GND8" gate="1" x="175.26" y="132.08"/>
 <instance part="GND1" gate="1" x="22.86" y="116.84"/>
@@ -20751,9 +20751,9 @@ connect to ground if unused</text>
 </segment>
 <segment>
 <pinref part="GND10" gate="1" pin="GND"/>
-<wire x1="180.34" y1="48.26" x2="180.34" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="48.26" x2="177.8" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="J4" gate="G$1" pin="2"/>
-<wire x1="180.34" y1="55.88" x2="182.88" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="55.88" x2="182.88" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND1" gate="1" pin="GND"/>
@@ -20898,17 +20898,18 @@ connect to ground if unused</text>
 <wire x1="66.04" y1="129.54" x2="66.04" y2="134.62" width="0.1524" layer="91"/>
 <junction x="66.04" y="129.54"/>
 <pinref part="J1" gate="G$1" pin="4"/>
+<label x="25.4" y="129.54" size="1.778" layer="95" font="vector"/>
 </segment>
 </net>
 <net name="EN" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="EN"/>
 <wire x1="106.68" y1="106.68" x2="99.06" y2="106.68" width="0.1524" layer="91"/>
-<label x="99.06" y="106.68" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="99.06" y="106.68" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <wire x1="20.32" y1="132.08" x2="33.02" y2="132.08" width="0.1524" layer="91"/>
-<label x="53.34" y="132.08" size="1.27" layer="95" xref="yes"/>
+<label x="53.34" y="132.08" size="1.27" layer="95" font="vector" xref="yes"/>
 <pinref part="J1" gate="G$1" pin="5"/>
 <pinref part="R1" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="132.08" x2="53.34" y2="132.08" width="0.1524" layer="91"/>
@@ -20927,17 +20928,18 @@ connect to ground if unused</text>
 <wire x1="81.28" y1="127" x2="81.28" y2="137.16" width="0.1524" layer="91"/>
 <junction x="81.28" y="127"/>
 <pinref part="J1" gate="G$1" pin="3"/>
+<label x="25.4" y="127" size="1.778" layer="95" font="vector"/>
 </segment>
 </net>
 <net name="INT" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="!INT"/>
 <wire x1="106.68" y1="99.06" x2="99.06" y2="99.06" width="0.1524" layer="91"/>
-<label x="99.06" y="99.06" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="99.06" y="99.06" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <wire x1="20.32" y1="134.62" x2="40.64" y2="134.62" width="0.1524" layer="91"/>
-<label x="53.34" y="134.62" size="1.27" layer="95" xref="yes"/>
+<label x="53.34" y="134.62" size="1.27" layer="95" font="vector" xref="yes"/>
 <pinref part="J1" gate="G$1" pin="6"/>
 <pinref part="R2" gate="G$1" pin="1"/>
 <wire x1="40.64" y1="134.62" x2="53.34" y2="134.62" width="0.1524" layer="91"/>
@@ -20949,11 +20951,11 @@ connect to ground if unused</text>
 <segment>
 <pinref part="U1" gate="G$1" pin="!TRIG"/>
 <wire x1="106.68" y1="96.52" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
-<label x="99.06" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="99.06" y="96.52" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <wire x1="20.32" y1="137.16" x2="48.26" y2="137.16" width="0.1524" layer="91"/>
-<label x="53.34" y="137.16" size="1.27" layer="95" xref="yes"/>
+<label x="53.34" y="137.16" size="1.27" layer="95" font="vector" xref="yes"/>
 <pinref part="J1" gate="G$1" pin="7"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="48.26" y1="137.16" x2="53.34" y2="137.16" width="0.1524" layer="91"/>
