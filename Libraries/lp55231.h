@@ -27,17 +27,20 @@ class lp55231
 
     bool loadProgram(const uint16_t* prog, uint8_t len);
     bool verifyProgram(const uint16_t* prog, uint8_t len);
+    bool setEngineEntryPoint(uint8_t engine, uint8_t addr);
     bool setEnginePC(uint8_t engine, uint8_t addr);
     uint8_t getEnginePC(uint8_t engine);
     uint8_t getEngineMap(uint8_t engine);
     uint8_t clearInterrupt();
 
     // engine modes
-    bool setEngineHold(uint8_t engine);
-    bool setEngineStep(uint8_t engine);
-    bool setEngineRunning(uint8_t engine);
-    bool setEngineOneShot(uint8_t engine);
+    bool setEngineModeHold(uint8_t engine);
+    bool setEngineModeStep(uint8_t engine);
+    bool setEngineModeOnce(uint8_t engine);
+    bool setEngineModeFree(uint8_t engine);
     uint8_t getEngineMode(uint8_t engine);
+
+    bool setEngineRunning(uint8_t engine);
 
     void waitForBusy();
 

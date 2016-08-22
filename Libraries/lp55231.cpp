@@ -217,7 +217,7 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
   // "Load program mode can be entered from the disabled mode only.  be
   // entered from the disabled mode only."
   writeReg(REG_CNTRL2, 0x00);
-  writeReg(REG_CNTRL2, 0x10);
+  writeReg(REG_CNTRL2, 0x15);
 
   waitForBusy();
 
@@ -257,6 +257,8 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
     Wire.endTransmission();
   }
 
+  writeReg(REG_CNTRL2, 0x00);
+
   return true;
 }
 
@@ -273,8 +275,8 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
   }
 
   writeReg(REG_CNTRL2, 0x00);// engines into disable mode - required for entry to program mode.
-  writeReg(REG_CNTRL2, 0x10);// engines into program mode?
-  /try to read  program from chip,
+  writeReg(REG_CNTRL2, 0x15);// engines into program mode?
+  //try to read  program from chip,
   // datasheet says MSB of each instruction is in earlier address
   // TBD: could optimize with a sequence of byte writes, using auto increment
 
@@ -337,6 +339,22 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
     }
   }
 
+  writeReg(REG_CNTRL2, 0x00);
+
+  return true;
+}
+
+bool lp55231::setEngineEntryPoint(uint8_t engine, uint8_t addr)
+{
+
+  if(engine > 2)
+  {
+    Serial.println("Invalid engine num in set EP");
+    return false;
+  }
+
+  writeReg(REG_PROG1_START + engine, addr);
+
   return true;
 }
 
@@ -366,24 +384,10 @@ bool lp55231::setEnginePC(uint8_t engine, uint8_t addr)
 
   temp = (control_val & ~(0x30 >> (engine * 2)));
 
-  Serial.print("set PC: ");
-  Serial.print(control_val, HEX);
-  Serial.print(" ");
-  Serial.print(temp, HEX);
-  Serial.print(" ");
-  Serial.print(engine);
-  Serial.print(" ");
-  Serial.println(addr);
-
   writeReg(REG_CNTRL2, 0x3ff); // halt engines immediately.
   writeReg(REG_CNTRL1, temp);// put engine in load mode
-  //writeReg(REG_CNTRL2, 0x10);// engine 1 load mode
-
-//  delay(50); // allow it to finish current instruction
 
   writeReg(REG_PC1 + engine, addr);
-
-//  delay(50); // allow it to finish current instruction
 
   // restore prev mode?
   writeReg(REG_CNTRL1, control_val);
@@ -402,20 +406,8 @@ uint8_t lp55231::getEnginePC(uint8_t engine)
     Serial.println("Invalid engine num in set PC");
     return -1;
   }
-  //
-  // control_val = readReg(REG_CNTRL1);
-  // //control_val &= ~0x30;
-  // // TBd - engine specific!!
-  // // TBD - wait for BSY
-  // writeReg(REG_CNTRL1, (control_val & ~0x30));
-  //
-  // //waitForBusy();
-  // delay(10);
 
-  pc_val =  readReg(REG_PC1 + engine);
-
-  // // restore old control val;
-  // writeReg(REG_CNTRL1, control_val);
+  pc_val = readReg(REG_PC1 + engine);
 
   return(pc_val);
 }
@@ -431,15 +423,117 @@ uint8_t lp55231::getEngineMap(uint8_t engine)
   return(readReg(REG_ENG1_MAP_LSB + engine));
 }
 
-bool lp55231::setEngineHold(uint8_t engine)
+bool lp55231::setEngineModeHold(uint8_t engine)
 {
+  uint8_t val;
+
+  if(engine > 2)
+  {
+    Serial.println("Set free got invalid engine #");
+    return false;
+  }
+
+  // Set the enghine to "free running" execution type
+  // bits to 0b00
+  val = readReg(REG_CNTRL1);
+  val &= ~(0x30 >> (engine * 2));
+  //val |= (0x10 >> (engine * 2));
+  writeReg(REG_CNTRL1, val );
+
+  return(true);
+}
+
+bool lp55231::setEngineModeStep(uint8_t engine)
+{
+  uint8_t val;
+
+  if(engine > 2)
+  {
+    Serial.println("Set free got invalid engine #");
+    return false;
+  }
+
+  // Set the enghine to "single step" execution type
+  // bits to 0b01
+  val = readReg(REG_CNTRL1);
+  val &= ~(0x30 >> (engine * 2));
+  val |= (0x10 >> (engine * 2));
+  writeReg(REG_CNTRL1, val );
+
+  return(true);
+}
+
+bool lp55231::setEngineModeOnce(uint8_t engine)
+{
+  uint8_t val;
+
+  // This mode might not be the most useful.
+  // It executes the pointed instruction, then
+  // sets exec mode to hold, and resets the PC.
+  // It's an astringent form of step (which advances the PC, instead)
+
+  if(engine > 2)
+  {
+    Serial.println("Set one shot got invalid engine #");
+    return false;
+  }
+
+  // Set the enghine to "one shot" execution type
+  // Bits to 0b11
+  val = readReg(REG_CNTRL1);
+  val |= (0x30 >> (engine * 2));
+
+  Serial.print("C1: ");
+  Serial.println(val, HEX);
+
+  writeReg(REG_CNTRL1, val );
+
+  return(true);
 
 }
 
-bool lp55231::setEngineStep(uint8_t engine)
+bool lp55231::setEngineModeFree(uint8_t engine)
 {
+  uint8_t val;
+
+  if(engine > 2)
+  {
+    Serial.println("Set free got invalid engine #");
+    return false;
+  }
+
+  // Set the enghine to "free running" execution type
+  val = readReg(REG_CNTRL1);
+  val &= ~(0x30 >> (engine * 2));
+  val |= (0x20 >> (engine * 2));
+
+  // Serial.print("Free: ");
+  // Serial.print(engine, HEX);
+  // Serial.print(" ");
+  // Serial.println(val, HEX);
+
+  writeReg(REG_CNTRL1, val );
+
+  return(true);
+}
+
+uint8_t lp55231::getEngineMode(uint8_t engine)
+{
+  uint8_t val;
+
+  if(engine > 2)
+  {
+    Serial.println("Get engine mode got invalid engine #");
+    return false;
+  }
+
+  val = readReg(REG_CNTRL1);
+  val >>= (engine * 2);
+  val &= 0x03;
+  return(val);
 
 }
+
 
 bool lp55231::setEngineRunning(uint8_t engine)
 {
@@ -450,40 +544,17 @@ bool lp55231::setEngineRunning(uint8_t engine)
     Serial.println("Set running got invalid engine #");
     return false;
   }
-  // TBD - get 2 & 3 enabled...
 
-  // tell engine how to execute the program...free/step, etc
-  // read/modify/write of both values.
-
-  // Set the enghine to "free running" execution type
-  val = readReg(REG_CNTRL1);
-  val &= ~(0x30 >> (engine * 2));
-  val |= (0x20) >> (engine * 2);
-
-  val &= 0xf0; // TEMP: strike modes on other engines...
-
-  //val =  0x40 | 0x20;
-  writeReg(REG_CNTRL1, val );
-
-  // and start execution by setting "run program" mode
+  // This assumes that a suitable run mode in CNTRL1 was already selected.
+  // start execution by setting "run program" mode
   val = readReg(REG_CNTRL2);
   val &= ~(0x30 >> (engine * 2));
-  val |= (0x20) >> (engine * 2);
-  //val = 0x20;
+  val |= (0x20>> (engine * 2));
   writeReg(REG_CNTRL2, val);
 
   return true;
 }
 
-bool lp55231::setEngineOneShot(uint8_t engine)
-{
-
-}
-
-uint8_t lp55231::getEngineMode(uint8_t engine)
-{
-
-}
 
 
 uint8_t lp55231::clearInterrupt()
