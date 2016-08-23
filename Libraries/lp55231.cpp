@@ -175,6 +175,79 @@ bool lp55231::setDriveCurrent(uint8_t channel, uint8_t value)
   return true;
 }
 
+int8_t lp55231::readDegC()
+{
+  uint8_t status;
+  int8_t  temperature;
+
+  writeReg(REG_TEMP_CTL, 0x04);
+
+  do
+  {
+    status = readReg(REG_TEMP_CTL);
+    //Serial.print(".");
+  }while(status & 0x80);
+
+  temperature = (int8_t)readReg(REG_TEMP_READ);
+
+  return temperature;
+}
+
+float  lp55231::readLEDADC(uint8_t channel)
+{
+  uint8_t reading;
+  float volts;
+#if 0
+  writeReg(REG_TEST_CTL, 0x80 |(channel & 0x0f));
+
+  // No reg bit to poll for completing - simply delay.
+  delay(3);
+
+  reading = readReg(REG_TEST_ADC);
+
+
+#else
+  reading = readADCInternal(channel & 0x0f);
+
+  volts = (reading * 0.03) - 1.478;
+#endif
+  return volts;
+}
+
+float  lp55231::readVoutADC()
+{
+  uint8_t reading;
+  float volts;
+
+  reading = readADCInternal(0x0f);
+
+  volts = (reading * 0.03) - 1.478;
+  return volts;
+}
+
+float  lp55231::readVddADC()
+{
+  uint8_t reading;
+  float volts;
+
+  reading = readADCInternal(0x10);
+
+  volts = (reading * 0.03) - 1.478;
+  return volts;
+}
+
+float  lp55231::readIntADC()
+{
+  uint8_t reading;
+  float volts;
+
+  reading = readADCInternal(0x11);
+
+  volts = (reading * 0.03) - 1.478;
+  return volts;
+}
+
+
 bool lp55231::setMasterFader(uint8_t engine, uint8_t value)
 {
   if((engine == 0) || (engine > 3))
@@ -577,6 +650,20 @@ void lp55231::waitForBusy()
 }
 
 /////////////////////////////////////////////////////////////
+
+uint8_t lp55231::readADCInternal(uint8_t channel)
+{
+  writeReg(REG_TEST_CTL, 0x80 |(channel & 0x1f));
+
+  // No reg bit to poll for completing - simply delay.
+  delay(3);
+
+  return(readReg(REG_TEST_ADC));
+
+  //volts = (reading * 0.03) - 1.478;
+
+
+}
 
 uint8_t lp55231::readReg(uint8_t reg)
 {
