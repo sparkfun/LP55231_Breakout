@@ -308,11 +308,14 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
 
     for(uint8_t i = 0; i < 16; i++)
     {
+
+      //Serial.print("Writing i:")
+
       Wire.beginTransmission(_address);
       Wire.write((REG_PROG_MEM_BASE + (i*2)));
       // MSB then LSB
-      Wire.write((prog[i]>> 8) & 0xff);
-      Wire.write(prog[i] & 0xff);
+      Wire.write((prog[(page*16) + i]>> 8) & 0xff);
+      Wire.write(prog[(page*16) + i] & 0xff);
       Wire.endTransmission();
     }
   }
@@ -325,8 +328,8 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
     Wire.beginTransmission(_address);
     Wire.write((REG_PROG_MEM_BASE + (i*2)));
     // MSB then LSB
-    Wire.write((prog[i]>> 8) & 0xff);
-    Wire.write(prog[i] & 0xff);
+    Wire.write((prog[(page*16) + i]>> 8) & 0xff);
+    Wire.write(prog[(page*16) + i] & 0xff);
     Wire.endTransmission();
   }
 
@@ -362,20 +365,26 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
     {
       uint16_t msb, lsb;
       uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
-      Serial.print("Verifying: ");
-      Serial.println(addr, HEX);
+      // Serial.print("Verifying ram addr: ");
+      // Serial.println(addr, HEX);
 
       msb = readReg(addr);
       lsb = readReg(addr + 1);
 
       lsb |= (msb << 8);
 
-      if(lsb != prog[i])
+      // Serial.print("Verify (addr, data): ");
+      // Serial.print(i, HEX);
+      // Serial.print(" ");
+      // Serial.println(lsb, HEX);
+
+
+      if(lsb != prog[(page * 16) + i])
       {
         Serial.print("program mismatch.  Idx:");
-        Serial.print(i);
+        Serial.print(i, HEX);
         Serial.print(" local:");
-        Serial.print(prog[i], HEX);
+        Serial.print(prog[(page*16) + i], HEX);
         Serial.print(" remote:");
         Serial.println(lsb, HEX);
 
@@ -391,20 +400,20 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
   {
     uint16_t msb, lsb;
     uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
-    Serial.print("Verifying: ");
-    Serial.println(addr, HEX);
+    // Serial.print("Verifying: ");
+    // Serial.println(addr, HEX);
 
     msb = readReg(addr);
     lsb = readReg(addr + 1);
 
     lsb |= (msb << 8);
 
-    if(lsb != prog[i])
+    if(lsb != prog[(page*16) + i])
     {
       Serial.print("program mismatch.  Idx:");
-      Serial.print(i);
+      Serial.print(i, HEX);
       Serial.print(" local:");
-      Serial.print(prog[i], HEX);
+      Serial.print(prog[(page*16) + i], HEX);
       Serial.print(" remote:");
       Serial.println(lsb, HEX);
 
