@@ -32,7 +32,7 @@ void setup()
 {
   Serial.begin(9600);
   
-  delay(2000);
+  delay(10000);
   Serial.println("### Setup entry");
   
   pinMode(enable_pin, OUTPUT);
@@ -54,20 +54,36 @@ void setup()
 
   for(uint8_t i = 0; i < 9; i++)
   {
-    //ledChip.setLogBrightness(i);
+    ledChip.setLogBrightness(i);
     ledChip.setDriveCurrent(i, 111);
   }
 
 #if 1
-  if(ledChip.loadProgram(program, 16))
+  if(ledChip.loadProgram(program, (sizeof(program)/2)))
   {
     Serial.println("Program loaded?");
+
+    if(ledChip.verifyProgram(program, (sizeof(program)/2)))
+    {
+      Serial.println("program verifies");
+    }
   }
   else
   {
     Serial.println("Program dodn't load?");
   }
 #endif
+
+  ledChip.clearInterrupt();
+
+  ledChip.setEngineEntryPoint(0, 0);
+  ledChip.setEnginePC(0, 0);
+  
+  ledChip.setEngineModeFree(0);
+  ledChip.showControls();
+
+  ledChip.setEngineRunning(0);
+
 
   next = millis() + 3000;
 
@@ -83,13 +99,13 @@ void loop()
   int8_t  val;
   static uint32_t count = 0;
 
-  if( !digitalRead(interrupt_pin))
-  {
-    Serial.println("Interrupt asserted");
-    ledChip.clearInterrupt();
-    ledChip.setEnginePC(0, 0);
-    ledChip.setEngineRunning(0);
-  }
+//  if( !digitalRead(interrupt_pin))
+//  {
+//    Serial.println("Interrupt asserted");
+//    ledChip.clearInterrupt();
+//    ledChip.setEnginePC(0, 0);
+//    ledChip.setEngineRunning(0);
+//  }
   
   if(millis() >= next)
   {
