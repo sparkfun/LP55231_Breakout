@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-
 #include "lp55231.h"
 
 // register stuff
@@ -352,8 +351,8 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
       Wire.beginTransmission(_address);
       Wire.write((REG_PROG_MEM_BASE + (i*2)));
       // MSB then LSB
-      Wire.write((prog[i]>> 8) & 0xff);
-      Wire.write(prog[i] & 0xff);
+      Wire.write((prog[(i + (page*16))]>> 8) & 0xff);
+      Wire.write(prog[i + (page*16)] & 0xff);
       Wire.endTransmission();
     }
   }
@@ -366,8 +365,8 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
     Wire.beginTransmission(_address);
     Wire.write((REG_PROG_MEM_BASE + (i*2)));
     // MSB then LSB
-    Wire.write((prog[i]>> 8) & 0xff);
-    Wire.write(prog[i] & 0xff);
+    Wire.write((prog[i + (page*16)]>> 8) & 0xff);
+    Wire.write(prog[i + (page*16)] & 0xff);
     Wire.endTransmission();
   }
 
@@ -411,12 +410,12 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
 
       lsb |= (msb << 8);
 
-      if(lsb != prog[i])
+      if(lsb != prog[i + (page*16)])
       {
         Serial.print("program mismatch.  Idx:");
         Serial.print(i);
         Serial.print(" local:");
-        Serial.print(prog[i], HEX);
+        Serial.print(prog[i + (page*16)], HEX);
         Serial.print(" remote:");
         Serial.println(lsb, HEX);
 
@@ -440,12 +439,12 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
 
     lsb |= (msb << 8);
 
-    if(lsb != prog[i])
+    if(lsb != prog[i + (page*16)])
     {
       Serial.print("program mismatch.  Idx:");
       Serial.print(i);
       Serial.print(" local:");
-      Serial.print(prog[i], HEX);
+      Serial.print(prog[i + (page*16)], HEX);
       Serial.print(" remote:");
       Serial.println(lsb, HEX);
 
