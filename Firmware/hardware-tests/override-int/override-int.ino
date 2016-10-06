@@ -2,7 +2,7 @@
 
 #include <Wire.h>
 
-#include "lp55231.h"
+//#include "lp55231.h"
 
 static const int32_t enable_pin = 15; // Apparently active high?
 static const int32_t trigger_pin = 14; // low if unused
@@ -40,9 +40,10 @@ void setup()
 
   for(uint8_t i = 0; i < 9; i++)
   {
-    ledChip.setDriveCurrent(i, 0xff);
-    //ledChip.setLogBrightness(i);
+    ledChip.setDriveCurrent(i, 111);
   }
+
+  ledChip.overrideIntToGPO(true);
 
   next = millis() + 3000;
 
@@ -61,47 +62,20 @@ void loop()
 
   if(millis() >= next)
   {
-    next += 1000;
-    count++;
-
-#if 0
     Serial.print("#");
-    Serial.print(count);
-    Serial.print(" ");
-    Serial.print(ledChip.readLEDADC(0));
-    Serial.print(" ");
-    Serial.print(ledChip.readLEDADC(1));
-    Serial.print(" ");
-    Serial.println(ledChip.readLEDADC(6));
+    Serial.println(count);
 
-    Serial.print("Vout: ");
-    Serial.print(ledChip.readVoutADC());
-    Serial.print(" Vdd: ");
-    Serial.print(ledChip.readVddADC());
-    Serial.print(" Vint: ");
-    Serial.println(ledChip.readIntADC());
-#endif
+    ledChip.setBrightness(prev, 0);
+    ledChip.setBrightness(count, 0xff);
 
-    if((count % 10) == 0)
-    {
-      if((count % 20) == 0)
-      {
-        for(uint8_t i = 0; i < 9; i++)
-        {
-          ledChip.setBrightness(i, 0xff);  
-        }
-      }
-      else
-      {
-        for(uint8_t i = 0; i < 9; i++)
-        {
-          ledChip.setBrightness(i, 0);  
-        }
-      }
+    ledChip.setIntGPOVal(count & 0x01);
       
-    }
-
+    prev = count % 9;
+    count++;
+    count %= 9;
+    next += 5000;
 
   }
 }
+
 
