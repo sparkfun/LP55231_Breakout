@@ -30,6 +30,9 @@ class lp55231
     float  readVddADC();
     float  readIntADC();
 
+    void overrideIntToGPO(bool overrideOn );
+    bool setIntGPOVal(bool value);
+
 
     // Execution engine related items.
     bool loadProgram(const uint16_t* prog, uint8_t len);

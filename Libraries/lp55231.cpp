@@ -105,7 +105,7 @@ void lp55231::init()
 {
   Wire.begin();
 
-  // TBD: so we want more operations in here, ro should they be called
+  // TBD: so we want more operations in here, or should they be called
   // explicitly?
 }
 
@@ -115,7 +115,7 @@ void lp55231::enable()
   writeReg(REG_CNTRL1, 0x40 );
 
   // enable internal clock & charge pump & auto increment
-  writeReg(REG_MISC, 0x5b);
+  writeReg(REG_MISC, 0x53);
 }
 
 void lp55231::disable()
@@ -135,10 +135,10 @@ void lp55231::reset()
 
 bool lp55231::setBrightness(uint8_t channel, uint8_t value)
 {
-  Serial.print("setBrt: chan: ");
-  Serial.print(channel);
-  Serial.print(" val: ");
-  Serial.println(value);
+  // Serial.print("setBrt: chan: ");
+  // Serial.print(channel);
+  // Serial.print(" val: ");
+  // Serial.println(value);
 
   if(channel >= 9)
   {
@@ -247,6 +247,47 @@ float  lp55231::readIntADC()
   return volts;
 }
 
+void lp55231::overrideIntToGPO(bool overrideOn )
+{
+  uint8_t regVal;
+
+  if(overrideOn)
+  {
+      regVal = 0x04;
+  }
+  else
+  {
+    regVal = 0;
+  }
+
+  writeReg(REG_INT_GPIO, regVal);
+}
+
+bool lp55231::setIntGPOVal(bool value)
+{
+  uint8_t regVal;
+
+  regVal = readReg(REG_INT_GPIO);
+
+  if (!(regVal & 0x04))
+  {
+    return false;
+  }
+
+  if(value)
+  {
+    regVal |= 0x01;
+  }
+  else
+  {
+    regVal &= ~0x01;
+  }
+
+  writeReg(REG_INT_GPIO, regVal);
+}
+
+
+
 
 bool lp55231::setMasterFader(uint8_t engine, uint8_t value)
 {
@@ -308,14 +349,11 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
 
     for(uint8_t i = 0; i < 16; i++)
     {
-
-      //Serial.print("Writing i:")
-
       Wire.beginTransmission(_address);
       Wire.write((REG_PROG_MEM_BASE + (i*2)));
       // MSB then LSB
-      Wire.write((prog[(page*16) + i]>> 8) & 0xff);
-      Wire.write(prog[(page*16) + i] & 0xff);
+      Wire.write((prog[i]>> 8) & 0xff);
+      Wire.write(prog[i] & 0xff);
       Wire.endTransmission();
     }
   }
@@ -328,8 +366,8 @@ bool lp55231::loadProgram(const uint16_t* prog, uint8_t len)
     Wire.beginTransmission(_address);
     Wire.write((REG_PROG_MEM_BASE + (i*2)));
     // MSB then LSB
-    Wire.write((prog[(page*16) + i]>> 8) & 0xff);
-    Wire.write(prog[(page*16) + i] & 0xff);
+    Wire.write((prog[i]>> 8) & 0xff);
+    Wire.write(prog[i] & 0xff);
     Wire.endTransmission();
   }
 
@@ -365,26 +403,20 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
     {
       uint16_t msb, lsb;
       uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
-      // Serial.print("Verifying ram addr: ");
-      // Serial.println(addr, HEX);
+      Serial.print("Verifying: ");
+      Serial.println(addr, HEX);
 
       msb = readReg(addr);
       lsb = readReg(addr + 1);
 
       lsb |= (msb << 8);
 
-      // Serial.print("Verify (addr, data): ");
-      // Serial.print(i, HEX);
-      // Serial.print(" ");
-      // Serial.println(lsb, HEX);
-
-
-      if(lsb != prog[(page * 16) + i])
+      if(lsb != prog[i])
       {
         Serial.print("program mismatch.  Idx:");
-        Serial.print(i, HEX);
+        Serial.print(i);
         Serial.print(" local:");
-        Serial.print(prog[(page*16) + i], HEX);
+        Serial.print(prog[i], HEX);
         Serial.print(" remote:");
         Serial.println(lsb, HEX);
 
@@ -400,20 +432,20 @@ bool lp55231::verifyProgram(const uint16_t* prog, uint8_t len)
   {
     uint16_t msb, lsb;
     uint8_t addr = (REG_PROG_MEM_BASE + (i*2));
-    // Serial.print("Verifying: ");
-    // Serial.println(addr, HEX);
+    Serial.print("Verifying: ");
+    Serial.println(addr, HEX);
 
     msb = readReg(addr);
     lsb = readReg(addr + 1);
 
     lsb |= (msb << 8);
 
-    if(lsb != prog[(page*16) + i])
+    if(lsb != prog[i])
     {
       Serial.print("program mismatch.  Idx:");
-      Serial.print(i, HEX);
+      Serial.print(i);
       Serial.print(" local:");
-      Serial.print(prog[(page*16) + i], HEX);
+      Serial.print(prog[i], HEX);
       Serial.print(" remote:");
       Serial.println(lsb, HEX);
 
