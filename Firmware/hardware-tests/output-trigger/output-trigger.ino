@@ -107,9 +107,15 @@ void setup()
 
   next = millis() + 3000;
 
+  ledChip.clearInterrupt();
+  
+  ledChip.setEngineEntryPoint(0, 0);
   ledChip.setEnginePC(0, 0);
-  ledChip.setEngineRunning(0);
+  
+  ledChip.setEngineModeFree(0);
+  ledChip.showControls();
 
+  ledChip.setEngineRunning(0);
 
   Serial.println("### Setup complete");
 
