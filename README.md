@@ -1,7 +1,7 @@
-SparkFun LP55231 LED Driver Breakout Arduino Library
+SparkFun LP55231 LED Driver Breakout
 ========================================
 
-![SparkFun LP55231 LED Driver Breakout Arduino Library](https://cdn.sparkfun.com//assets/parts/1/1/5/2/0/13884-02.jpg)
+![SparkFun LP55231 LED Driver Breakout ](https://cdn.sparkfun.com//assets/parts/1/1/5/2/0/13884-02.jpg)
 
 [*SparkFun LP55231 LED Driver Breakout (BOB-13884)*](https://www.sparkfun.com/products/13884)
 
